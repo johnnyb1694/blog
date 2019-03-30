@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Science on Johnny&#39;s Blog</title>
+    <link>/tags/data-science/</link>
+    <description>Recent content in Data Science on Johnny&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 30 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/data-science/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Captive Cetaceans: Mortality Investigation</title>
+      <link>/2019/03/30/captive-cetaceans-mortality-investigation/</link>
+      <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/03/30/captive-cetaceans-mortality-investigation/</guid>
+      <description>Introduction This is my first ever contribution to the TidyTuesday project hosted on github. In this post, I am going to analyse a dataset submitted on various cetacean species (incase, like me, you don’t know what a ‘cetacean’ is, it collectively refers to species such as dolphins and whales).
+As a student actuary, I am quite interested in the study of mortality. Within actuarial work itself, mortality investigations are, unsurprisingly, limited to human beings (in the context of selling life insurance and annuities, where setting the appropriate premium is of paramount importance).</description>
+    </item>
+    
+  </channel>
+</rss>
