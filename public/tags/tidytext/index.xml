@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidytext on Johnny&#39;s Blog</title>
+    <link>/tags/tidytext/</link>
+    <description>Recent content in Tidytext on Johnny&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tidytext/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Trump Tweets - Exploratory Analysis</title>
+      <link>/2019/03/16/exploratory-analysis-of-trump-tweets/</link>
+      <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/03/16/exploratory-analysis-of-trump-tweets/</guid>
+      <description>Introduction The data that I have chosen to analyse in this document is a repository of Trump tweets which span roughly two years of data all the way up until Trump’s election as US president in November 2016. The original CSV file I have used in the following analysis can be found here on Kaggle.
+ Credits My analysis of Trump’s tweets draws a substantial amount of insight from David Robinson’s recent screencast where he analysed a repository of medium articles - that specific screencast can be found here and I highly encourage anyone interested in text mining to watch it at their next available moment.</description>
+    </item>
+    
+  </channel>
+</rss>

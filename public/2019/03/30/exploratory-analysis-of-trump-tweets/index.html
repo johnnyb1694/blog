@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.54.0" />
+
+
+<title>Exploratory Analysis of Trump Tweets - Johnny&#39;s Blog</title>
+<meta property="og:title" content="Exploratory Analysis of Trump Tweets - Johnny&#39;s Blog">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/yin-yang.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">Posts</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/johnnyb1694">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/johnnybreen/">LinkedIn</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">13 min read</span>
+    
+
+    <h1 class="article-title">Exploratory Analysis of Trump Tweets</h1>
+
+    
+    <span class="article-date">2019-03-30</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>The data that I have chosen to analyse in this document is a repository of Trump tweets which span roughly two years of data all the way up until Trump’s election as US president in November 2016. The original CSV file I have used in the following analysis can be found <a href="https://www.kaggle.com/kingburrito666/better-donald-trump-tweets">here</a> on Kaggle.</p>
+</div>
+<div id="credits" class="section level3">
+<h3>Credits</h3>
+<p>My analysis of Trump’s tweets draws a substantial amount of insight from David Robinson’s recent screencast where he analysed a repository of medium articles - that specific screencast can be found <a href="https://www.youtube.com/watch?v=C69QyycHsgE">here</a> and I highly encourage anyone interested in text mining to watch it at their next available moment.</p>
+</div>
+<div id="plan" class="section level3">
+<h3>Plan</h3>
+<p>I have outlined below the main tasks that need to be performed in order to create a simple text mining model which can be fit to the data:</p>
+<ul>
+<li>Read in the data</li>
+<li>Preprocess the data</li>
+<li>Explore the data (attempt to perform sentiment &amp; word correlation analyses)</li>
+<li>Apply a machine learning model to predict the number of retweets, based on the contents of a given tweet</li>
+</ul>
+<p>We would like to create a model that can take a given input tweet and assign to that tweet the predicted number of retweets based on its contents. This type of task may (with large caveats of course!) be useful for a business looking to improve their social media presence.</p>
+</div>
+<div id="preliminaries" class="section level2">
+<h2>Preliminaries</h2>
+<p>The first step is to load any necessary packages and read in the data:</p>
+<pre class="r"><code>load_req_packages &lt;- function (req_libraries = c(&quot;tidyverse&quot;, &quot;magrittr&quot;, &quot;broom&quot;, &quot;widyr&quot;, &quot;ggraph&quot;, &quot;igraph&quot;, &quot;tidytext&quot;, &quot;glmnet&quot;)) {
+  for (req_lib in req_libraries) {
+    if (!(req_lib %in% installed.packages())) {
+      install.packages(req_lib)
+    }
+  }
+  sapply(req_libraries, require, character.only = TRUE)
+}
+
+load_req_packages() # runs the function defined above</code></pre>
+<pre><code>## tidyverse  magrittr     broom     widyr    ggraph    igraph  tidytext 
+##      TRUE      TRUE      TRUE      TRUE      TRUE      TRUE      TRUE 
+##    glmnet 
+##      TRUE</code></pre>
+<pre class="r"><code>theme_set(theme_light()) # initialise the theme for ggplot2</code></pre>
+<p>To read in CSV data, I will make use of the <code>readr::read_csv()</code> function:</p>
+<pre class="r"><code>proj_root &lt;- &quot;~/Desktop/Data Science/R/Project Trump/&quot; 
+trump_tweets_raw &lt;- read_csv(file = paste0(proj_root, &quot;Data/Trump_Tweets.csv&quot;))</code></pre>
+</div>
+<div id="pre-processing" class="section level2">
+<h2>Pre-processing</h2>
+<p>Before we pre-process the data, we can inspect the first 10 rows of the data using the <code>head()</code> function:</p>
+<pre class="r"><code> trump_tweets_raw %&gt;%
+    head()</code></pre>
+<pre><code>## # A tibble: 6 x 12
+##   Date  Time  Tweet_Text Type  Media_Type Hashtags Tweet_Id Tweet_Url
+##   &lt;chr&gt; &lt;tim&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    
+## 1 16-1… 15:26 Today we … text  photo      ThankAV…  7.97e17 https://…
+## 2 16-1… 13:33 Busy day … text  &lt;NA&gt;       &lt;NA&gt;      7.97e17 https://…
+## 3 16-1… 11:14 Love the … text  &lt;NA&gt;       &lt;NA&gt;      7.97e17 https://…
+## 4 16-1… 02:19 Just had … text  &lt;NA&gt;       &lt;NA&gt;      7.97e17 https://…
+## 5 16-1… 02:10 A fantast… text  &lt;NA&gt;       &lt;NA&gt;      7.97e17 https://…
+## 6 16-1… 19:31 Happy 241… text  photo      &lt;NA&gt;      7.97e17 https://…
+## # ... with 4 more variables:
+## #   twt_favourites_IS_THIS_LIKE_QUESTION_MARK &lt;int&gt;, Retweets &lt;int&gt;,
+## #   X11 &lt;int&gt;, X12 &lt;chr&gt;</code></pre>
+</div>
+<div id="questions-to-ponder" class="section level1">
+<h1>Questions to Ponder</h1>
+<p>Straight off the bat we have a few preliminary data-based questions:</p>
+<ol style="list-style-type: decimal">
+<li>Are the missing values in the <code>Media_Type</code> and <code>Hashtags</code> MCAR (“Missing Completely At Random”) or MNAR (“Missing Not At Random”)? In other words, do they actually</li>
+<li>Is the <code>Tweet_Id</code> useful at all? Why does it appear to be populated with a static value of <code>7.97e17</code>?</li>
+<li>What are <code>X11</code> and <code>X12</code>? Are they completely missing? They seem to stem from a parsing error when using <code>read_csv()</code> but we should verify this by glancing at the documentation for the source data</li>
+</ol>
+<p>We can solve question 3 by checking the documentation - this reveals that <code>X11</code> and <code>X12</code> are likely to be due to some parsing error. We can therefore remove them. Question 2 is not as clear-cut but it does not appear to be informative so we will drop it as well.</p>
+<p>As for question 1, I will make the assumption that <code>NA</code> indicates that either no photo was attached (in the case of <code>Media_Type</code>) or that no hashtag exists (in the case of <code>Hashtags</code>).</p>
+</div>
+<div id="pre-processing-tasks" class="section level1">
+<h1>Pre-processing Tasks</h1>
+<p>We now have a series of clear pre-processing tasks to follow:</p>
+<ol style="list-style-type: decimal">
+<li>Remove redundant columns</li>
+<li>Rename columns</li>
+<li>Impute missing values on ‘Media_Type’ and ‘Hashtags’ variables</li>
+<li>Convert the relevant variables to factors</li>
+<li>Separate dates and times into different columns</li>
+<li>Remove link quotations in the ‘Tweet_Text’ field</li>
+</ol>
+<pre class="r"><code># define which columns we would like to remove, rename and convert into factors
+cols_to_remove &lt;- c(&quot;X11&quot;, &quot;X12&quot;, &quot;Tweet_Id&quot;, &quot;Tweet_Url&quot;)
+cols_to_rename &lt;- c(Tweet = &quot;Tweet_Text&quot;, Likes = &quot;twt_favourites_IS_THIS_LIKE_QUESTION_MARK&quot;)
+cols_to_fct &lt;- c(&quot;Type&quot;, &quot;Media_Type&quot;, &quot;Hashtags&quot;)
+
+# define a simple function which can take, as input, the columns to turn into factors and output the corrected dataframe
+to_factor &lt;- function (df, cols_to_fct) {
+  df[cols_to_fct] &lt;- map_dfr(df[cols_to_fct], factor) %&gt;%
+    as_tibble()
+  return(df)
+}
+
+trump_tweets_clean &lt;- trump_tweets_raw %&gt;%
+  select(-cols_to_remove) %&gt;% 
+  rename(!!cols_to_rename) %&gt;% # since dplyr quotes its inputs, by default, we need to communicate that we have already done this (i.e. we don&#39;t want &#39;rename&#39; to take &#39;cols_to_rename&#39; too literally...) by using &#39;!!&#39;
+  replace_na(list(Media_Type = &quot;(None)&quot;, Hashtags = &quot;(None)&quot;)) %&gt;%
+  to_factor(cols_to_fct) %&gt;% 
+  separate(col = Date, into = c(&quot;Year&quot;, &quot;Month&quot;, &quot;Day&quot;), sep = &quot;-&quot;, convert = TRUE) %&gt;% 
+  separate(col = Time, into = c(&quot;Hour&quot;, &quot;Minute&quot;, &quot;Second&quot;), sep = &quot;:&quot;, convert = TRUE) %&gt;% 
+  mutate(Hour_Min = Hour + Minute / 60) %&gt;% 
+  select(-Minute, -Second) %&gt;% 
+  mutate(Tweet = str_replace_all(Tweet, &quot;(www|http:|https:)+[^\\s]+&quot;, &quot;&quot;)) %&gt;% # remove links
+  mutate(Tweet = str_replace_all(Tweet, &quot;\\d+\\:\\d+&quot;, &quot;&quot;)) 
+
+trump_tweets_clean %&gt;%
+    head()</code></pre>
+<pre><code>## # A tibble: 6 x 11
+##    Year Month   Day  Hour Tweet Type  Media_Type Hashtags  Likes Retweets
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;fct&gt; &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;    &lt;int&gt;
+## 1    16    11    11    15 &quot;Tod… text  photo      ThankAV… 127213    41112
+## 2    16    11    11    13 Busy… text  (None)     (None)   141527    28654
+## 3    16    11    11    11 Love… text  (None)     (None)   183729    50039
+## 4    16    11    11     2 Just… text  (None)     (None)   214001    67010
+## 5    16    11    11     2 A fa… text  (None)     (None)   178499    36688
+## 6    16    11    10    19 &quot;Hap… text  photo      (None)   159176    44655
+## # ... with 1 more variable: Hour_Min &lt;dbl&gt;</code></pre>
+<div id="data-exploration" class="section level2">
+<h2>Data Exploration</h2>
+<p>We can see from the data the period of time over which this data spans:</p>
+<pre class="r"><code>trump_tweets_clean %&gt;%
+    select(Year, Month) %&gt;%
+    distinct()</code></pre>
+<pre><code>## # A tibble: 17 x 2
+##     Year Month
+##    &lt;int&gt; &lt;int&gt;
+##  1    16    11
+##  2    16    10
+##  3    16     9
+##  4    16     8
+##  5    16     7
+##  6    16     6
+##  7    16     5
+##  8    16     4
+##  9    16     3
+## 10    16     2
+## 11    16     1
+## 12    15    12
+## 13    15    11
+## 14    15    10
+## 15    15     9
+## 16    15     8
+## 17    15     7</code></pre>
+<p>Donald Trump was officially elected in November 2016 so it looks as though these tweets capture most of his electoral journey. It would be interesting to observe his daily activity on Twitter split by year and month:</p>
+<pre class="r"><code>trump_tweets_clean %&gt;%
+  ggplot(aes(Hour, fill = as.factor(Month))) +
+  geom_density(show.legend = FALSE) +
+  facet_grid(Year~Month) +
+  theme(axis.text.x = element_text(size = 7.5)) +
+  labs(y = &quot;Density&quot;, 
+       title = &quot;Trump&#39;s Twitter Activity&quot;, 
+       subtitle = &quot;Split by year and month - Trump generally becomes active during the evenings&quot;)</code></pre>
+<p><img src="/post/2019-03-30-exploratory-analysis-of-trump-tweets_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>It seems there isn’t much variation in his tweeting patterns over the course of the electoral journey.</p>
+<p>Let’s turn our attention to text mining by looking at the most frequently occurring words in this dataset. To do this, we leverage the tidytext function ‘unnest_tokens’ which splits each tweet into a one word per row format. To maintain an understanding of which word belongs to which tweet, we mutate the initial dataframe - before unnesting - so that each tweet has a pre-defined ‘ID’. We also remove any stop-words (e.g. ‘a’, ‘of’, ‘the’), digits and words like ‘Trump / trump’:</p>
+<pre class="r"><code>trump_tweets_unnested &lt;- trump_tweets_clean %&gt;%
+  mutate(ID = row_number()) %&gt;% 
+  unnest_tokens(output = &quot;Word&quot;, input = &quot;Tweet&quot;) %&gt;% # split each tweet into a series of one-word rows
+  anti_join(stop_words, by = c(&quot;Word&quot; = &quot;word&quot;)) %&gt;% # remove stop-words like &#39;a&#39;, &#39;the&#39; etc.
+  filter(!(Word %in% c(&quot;trump&quot;, &quot;Trump&quot;)), str_detect(Word, &quot;[a-z]&quot;)) # filter out any numbers
+
+trump_tweets_unnested # check on representation of data</code></pre>
+<pre><code>## # A tibble: 57,401 x 12
+##     Year Month   Day  Hour Type  Media_Type Hashtags  Likes Retweets
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;    &lt;int&gt;
+##  1    16    11    11    15 text  photo      ThankAV… 127213    41112
+##  2    16    11    11    15 text  photo      ThankAV… 127213    41112
+##  3    16    11    11    15 text  photo      ThankAV… 127213    41112
+##  4    16    11    11    15 text  photo      ThankAV… 127213    41112
+##  5    16    11    11    15 text  photo      ThankAV… 127213    41112
+##  6    16    11    11    15 text  photo      ThankAV… 127213    41112
+##  7    16    11    11    15 text  photo      ThankAV… 127213    41112
+##  8    16    11    11    13 text  (None)     (None)   141527    28654
+##  9    16    11    11    13 text  (None)     (None)   141527    28654
+## 10    16    11    11    13 text  (None)     (None)   141527    28654
+## # ... with 57,391 more rows, and 3 more variables: Hour_Min &lt;dbl&gt;,
+## #   ID &lt;int&gt;, Word &lt;chr&gt;</code></pre>
+<p>Now that we have split the data into a ‘tidy’ format, we can investigate the top 20 (say) most common used words:</p>
+<pre class="r"><code>trump_tweets_unnested %&gt;%
+  count(Word, sort = TRUE) %&gt;%
+  top_n(20) %&gt;%
+  mutate(Word = reorder(Word, n)) %&gt;%
+  ggplot(aes(Word, n, fill = n)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  scale_fill_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) +  
+  theme_classic() +
+  labs(x = &quot;Term&quot;,
+       y = &quot;Frequency&quot;,
+       title = &quot;Top 20 Most Frequently Used Words&quot;,
+       subtitle = &quot;An insight into Trump&#39;s most prevalent tweet contents&quot;)</code></pre>
+<p><img src="/post/2019-03-30-exploratory-analysis-of-trump-tweets_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>We can also perform an analysis of mood over the course of a defined period of time. For instance, we can observe fluctuations in Trump’s mood over the course of an ‘average’ day:</p>
+<pre class="r"><code>trump_tweets_unnested %&gt;% 
+  mutate(Hour = round(Hour)) %&gt;%
+  inner_join(get_sentiments(&quot;afinn&quot;), by = c(&quot;Word&quot; = &quot;word&quot;)) %&gt;%
+  group_by(Hour) %&gt;%
+  summarise(Sentiment_Score = mean(score)) %&gt;%
+  ungroup() %&gt;%
+  ggplot(aes(Hour, Sentiment_Score, fill = Sentiment_Score)) +
+  geom_col() +
+  theme_classic() +
+  scale_fill_gradient(low = &quot;red&quot;, high = &quot;blue&quot;) +
+  labs(y = &quot;Positivity Level&quot;,
+       fill = &quot;Positivity Level&quot;,
+       title = &quot;Sentiment Analysis of Tweets&quot;,
+       subtitle = &quot;An analysis of daily mood levels&quot;)</code></pre>
+<p><img src="/post/2019-03-30-exploratory-analysis-of-trump-tweets_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>This gives us some useful information but what might be more interesting for us is to investigate which choice of words appear to be most correlated with the number of retweets. In this case, each unique ID which we created prior to this stage comprises a series of words which form a tweet - we’re looking for the correlation between different words based on how frequently they appear <em>together</em> in any given tweet. To do this we will plot a network of words using the ‘ggraph’ and ‘igraph’ packages:</p>
+<pre class="r"><code># First, focus on words with a frequency of over 50 (this is subjective, you can make your own decisions here)
+trump_tweets_filtered &lt;- trump_tweets_unnested %&gt;%
+  add_count(Word) %&gt;%
+  filter(n &gt;= 50)
+
+# Second, of these words calculate the median number of retweets
+trump_tweets_summarised &lt;- trump_tweets_filtered %&gt;%
+  group_by(Word) %&gt;%
+  summarise(Med_Retweet = median(Retweets), Frequency = n()) %&gt;%
+  arrange(desc(Med_Retweet))
+
+# Third, calculate the correlation between the remaining most frequent words
+trump_word_corrs &lt;- trump_tweets_filtered %&gt;%
+  pairwise_cor(item = Word, feature = ID, sort = TRUE) %&gt;% # by &#39;feature&#39; this means the variable in the data which delineates different groups of words (as tweets) 
+  filter(correlation &gt;= 0.20)
+
+# Fourth, filter the retweets to include only words that have a sufficiently high correlation
+vertices &lt;- trump_tweets_summarised %&gt;%
+  filter(Word %in% trump_word_corrs$item1 | Word %in% trump_word_corrs$item2) 
+
+# Finally, plot the results of the analysis above
+set.seed(2018)
+trump_word_corrs %&gt;%
+  graph_from_data_frame(vertices = vertices) %&gt;%
+  ggraph() +
+  geom_node_point(aes(size = Frequency, colour = Med_Retweet)) +
+  geom_edge_link(aes(alpha = correlation)) +
+  geom_node_text(aes(label = name), repel = TRUE) +
+  theme_void() +
+  scale_colour_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) +
+  labs(title = &quot;Word Correlation Plot&quot;,
+       subtitle = &quot;Look for the red clusters - these indicate highly popular tweets&quot;,
+       colour = &quot;Retweets (Median)&quot;,
+       alpha = &quot;Correlation&quot;)</code></pre>
+<p><img src="/post/2019-03-30-exploratory-analysis-of-trump-tweets_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>We are now starting to observe more interpretable insights - Donald Trump’s propensity to comment on rivals like Bernie Sanders and Hillary Clinton appears to be correlated with his number of retweets. This is not surprising given that the time period associated with this dataset coincides with the US election campaign leading up to November 2016.</p>
+<p>The next step in our analysis will be to attempt to fit a penalised regression model to this data in order to understand further the most effective and least effective words to use in order to drive the number of retweets.</p>
+</div>
+<div id="machine-learning" class="section level2">
+<h2>Machine Learning</h2>
+<p>We plan to fit a LASSO model to the data for a few reasons:</p>
+<ul>
+<li>The LASSO model automatically performs variable selection which, in this case, amounts to omitting less important words from the model</li>
+<li>This particular model is much easier to interpret both analytically and graphically</li>
+</ul>
+<p>First we set up the ‘X’ matrix. Second we set up the target ‘Y’ vector to train on:</p>
+<pre class="r"><code># X variate
+trump_tweets_matrix &lt;- trump_tweets_filtered %&gt;%
+  select(ID, Word) %&gt;%
+  cast_sparse(row = ID, column = Word)
+
+# Y variate
+trump_retweets &lt;- trump_tweets_filtered$Retweets[match(rownames(trump_tweets_matrix), trump_tweets_filtered$ID)]</code></pre>
+<p>In order to fit the GLM we will use ‘glmnet’, a package developed by Trevor Hastie et al which facilitates the fitting of GLMs (standard and regularised). As we are only interested in interpretation, we won’t bother holding out a subsection of the data for testing at this stage (the code may be amended later down the line to adjust for this). I have decided to take the log of the response variable to hopefully improve the fit of the model slightly:</p>
+<pre class="r"><code>trump_glm &lt;- cv.glmnet(x = trump_tweets_matrix, y = log(trump_retweets))
+plot(trump_glm)</code></pre>
+<p><img src="/post/2019-03-30-exploratory-analysis-of-trump-tweets_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>We can observe from the plot above that the minimum MSE is achieved at a variable count of ~155. We can investigate the model in more detail by first tidying the model using the ‘broom’ package function ‘tidy’ and then filtering on all the series of models for the minimum lambda found above:</p>
+<pre class="r"><code>trump_term_influence &lt;- tidy(trump_glm$glmnet.fit) %&gt;% # tidy(), in this context, will summarise key model statistics in a data frame
+  filter(lambda == trump_glm$lambda.min) %&gt;%
+  transmute(Word = term, Influence = estimate) # similar to mutate() but drops un-mutated variables
+
+# Top 10 most positively influential (i.e. retweet-friendly) words
+trump_term_influence %&gt;%
+    arrange(desc(Influence)) %&gt;%
+    slice(1:10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    Word           Influence
+##    &lt;chr&gt;              &lt;dbl&gt;
+##  1 (Intercept)        7.84 
+##  2 draintheswamp      0.917
+##  3 maga               0.791
+##  4 imwithyou          0.675
+##  5 hillaryclinton     0.591
+##  6 movement           0.583
+##  7 pennsylvania       0.566
+##  8 carolina           0.534
+##  9 safe               0.533
+## 10 americafirst       0.532</code></pre>
+<pre class="r"><code># Top 10 most negatively influential (i.e. retweet-unfriendly) words
+trump_term_influence %&gt;%
+    arrange(Influence) %&gt;%
+    slice(1:10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    Word            Influence
+##    &lt;chr&gt;               &lt;dbl&gt;
+##  1 realdonaldtrump    -0.975
+##  2 donaldtrump        -0.746
+##  3 south              -0.729
+##  4 truth              -0.658
+##  5 donald             -0.639
+##  6 a.m                -0.566
+##  7 book               -0.494
+##  8 foxandfriends      -0.494
+##  9 hes                -0.396
+## 10 seanhannity        -0.394</code></pre>
+<p>The tables above indicate the most positively and negatively influential terms on retweets, respectively. They are the coefficient estimates associated with each term at the optimal value of the penalisation parameter lambda. We can pick out a few terms that we are interested in and observe how their influence changes as the value of lambda is decreased:</p>
+<pre class="r"><code>tidy(trump_glm$glmnet.fit) %&gt;%
+  filter(term %in% c(&quot;donaldtrump&quot;, &quot;media&quot;, &quot;bush&quot;, &quot;draintheswamp&quot;, &quot;truth&quot;, &quot;hillary&quot;)) %&gt;%
+  ggplot(aes(x = log(lambda), y = estimate, colour = term)) +
+  geom_line() +
+  geom_vline(xintercept = log(trump_glm$lambda.min), linetype = &quot;dotted&quot;) +
+  labs(x = &quot;Log-Lambda&quot;,
+       y = &quot;Coefficient Estimate&quot;,
+       colour = &quot;Term&quot;,
+       title = &quot;How key terms affect the number of retweets&quot;,
+       subtitle = &quot;Hilary and &#39;draintheswamp&#39; appear to be highly significant terms.&quot;)</code></pre>
+<p><img src="/post/2019-03-30-exploratory-analysis-of-trump-tweets_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="conclusions" class="section level2">
+<h2>Conclusions</h2>
+<p>This small kernel was only intended to be a very basic introduction to the world of text mining. This code could be taken much further both in terms of exploratory analysis, data pre-processing and modelling. Potential next steps might include:</p>
+<ul>
+<li>Investigating whether there are any external pieces of data that could be adjoined to the dataset and improve analysis. Each tweet has a timestamp - is there some external information which is influential in some way but not captured by the current data?</li>
+<li>Performing more rigorous training and validation of the LASSO model with separate training and holdout sets</li>
+<li>Exploring more of the relationships in the data (such as media type and hashtags or likes and retweets)</li>
+</ul>
+<p>Happy text mining everybody!</p>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
