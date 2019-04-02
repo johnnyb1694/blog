@@ -1,0 +1,15 @@
+---
+title: Incarceration Rates in the USA
+author: Johnny Breen
+date: '2019-04-02'
+slug: incarceration-rates-in-the-usa
+categories:
+  - R
+  - Data Science
+tags:
+  - Data Science
+  - R
+  - USA
+  - Prison System
+  - Incarceration
+---
