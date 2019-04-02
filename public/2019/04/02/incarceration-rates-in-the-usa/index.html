@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.54.0" />
+
+
+<title>Incarceration Rates in the USA - Johnny&#39;s Blog</title>
+<meta property="og:title" content="Incarceration Rates in the USA - Johnny&#39;s Blog">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/yin-yang.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">Posts</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/johnnyb1694">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/johnnybreen/">LinkedIn</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">7 min read</span>
+    
+
+    <h1 class="article-title">Incarceration Rates in the USA</h1>
+
+    
+    <span class="article-date">2019-04-02</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The data for this post comes from the <a href="https://github.com/vera-institute/incarceration_trends">Vera institute</a>. It comes as a timely reminder of the racial injustice that still exists in the United States prison system. If anyone is looking to learn more about this topic, then I recommend watching the documentary <a href="https://en.wikipedia.org/wiki/13th_(film)">‘13th’</a> - the name refers to the Thirteenth Amendment of the United States Constitution, which abolished slavery throughout the United States and ended involuntary servitude <em>except</em> as a punishment for a crime. I also can’t help sharing one of my favourite songs from that documentary featuring the excellent Common and Bilal:</p>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KO7tVuPHOxA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</center>
+<p>As I am currently facing a relatively busy period at work (and revising for exams), this post will be shorter than usual. I plan to focus on:</p>
+<ul>
+<li>How to build a map using <code>ggplot2</code>, <code>maps</code> and <code>mapdata</code>; and</li>
+<li>How to build an animated plot using <code>gganimate</code> (this was my first time too!)</li>
+</ul>
+</div>
+<div id="read-in-the-data" class="section level1">
+<h1>Read in the data</h1>
+<p>As always, we first load the packages that we plan to use:</p>
+<pre class="r"><code>library(tidyverse)
+library(rvest) # we scrape some information from the web on US state abbreviations
+library(magrittr)
+library(maps) # contains outlines of various counties, cities and states in the USA
+library(mapdata) # same as the above, but a little more detail
+library(gganimate) # for animated plots!
+
+theme_set(theme_light()) # sets the theme for all plots (unless we instruct otherwise)</code></pre>
+<p>Let’s first have a quick look at the summary-level data:</p>
+<pre class="r"><code>prison_summary_raw &lt;- read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-01-22/prison_summary.csv&quot;)</code></pre>
+</div>
+<div id="simple-plots-are-effective" class="section level1">
+<h1>Simple plots are effective</h1>
+<p>The great thing about <code>ggplot</code> is that you can plot something non-trivial within a few lines of code. Let’s see how the number of individuals in prison (per 100,000) has changed over the course of the last few decades:</p>
+<pre class="r"><code>prison_summary_raw %&gt;%
+  ggplot(aes(x = year, y = rate_per_100000, colour = urbanicity)) +
+  geom_line() +
+  facet_wrap(~pop_category) +
+  labs(x = &quot;Year&quot;,
+       y = &quot;Prison population per 100,000&quot;,
+       title = &quot;Change in prison populations over time&quot;,
+       subtitle = &quot;Split by race and gender&quot;,
+       colour = &quot;Urbanicity&quot;) +
+  theme_linedraw()</code></pre>
+<p><img src="/post/2019-04-02-incarceration-rates-in-the-usa_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Aside from the clear racial discrepancies that are demonstrated by this plot, it is worth noting that the ‘Other’ category appears to vanish just when the ‘Native American’, ‘Latino’ and ‘Asian’ categories begin to appear - this suggests that the latter categories were likely once grouped as ‘Other’. These are the types of useful insights you can gain <em>instantly</em> from simply plotting your data: visualisation is a great tool for pattern detection!</p>
+</div>
+<div id="geospatial-analysis" class="section level1">
+<h1>Geospatial analysis</h1>
+<p>This next section entails my first time to plot geospatial data. Luckily (for me), R comes equipped with several packages to help you to do this, most notably the <code>maps</code> package which contains enough data on various large countries (such as the USA and Canada) that you can integrate it with <code>ggplot2</code> fairly easily.</p>
+<p>My goal in this section is to develop on the theme we’ve just explored in the previous plot: how do incarceration rates for African Americans vary across the USA? First, I’m going to read in the full prison data kindly provided by the Vera institute. This data comprises the incarcerations made on a yearly basis, at county level, from 1970 to 2016:</p>
+<pre class="r"><code>prison_raw &lt;- read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-01-22/prison_population.csv&quot;)
+
+prison_raw</code></pre>
+<pre><code>## # A tibble: 1,327,797 x 9
+##     year state county_name urbanicity region division pop_category
+##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       
+##  1  1970 AL    Autauga Co… small/mid  South  East So… Total       
+##  2  1971 AL    Autauga Co… small/mid  South  East So… Total       
+##  3  1972 AL    Autauga Co… small/mid  South  East So… Total       
+##  4  1973 AL    Autauga Co… small/mid  South  East So… Total       
+##  5  1974 AL    Autauga Co… small/mid  South  East So… Total       
+##  6  1975 AL    Autauga Co… small/mid  South  East So… Total       
+##  7  1976 AL    Autauga Co… small/mid  South  East So… Total       
+##  8  1977 AL    Autauga Co… small/mid  South  East So… Total       
+##  9  1978 AL    Autauga Co… small/mid  South  East So… Total       
+## 10  1979 AL    Autauga Co… small/mid  South  East So… Total       
+## # ... with 1,327,787 more rows, and 2 more variables: population &lt;int&gt;,
+## #   prison_population &lt;int&gt;</code></pre>
+<p>One thing you’ll notice is that the states are expressed as abbreviations. Unfortunately the <code>maps</code> package supplies states as full names. Therefore, I went online to find a table which provides a list of US state abbreviations from <a href="https://www.usps.com">USPS</a>. I’ve used the <code>rvest</code> package written by Hadley Wickham which allows for the extraction of the relevant elements from webpages:</p>
+<pre class="r"><code>us_state_abbrevs &lt;- read_html(&#39;https://pe.usps.com/text/pub28/28apb.htm&#39;) %&gt;%
+  html_node(&quot;table.Basic_no_title&quot;) %&gt;%
+  html_table(header = TRUE) %&gt;%
+  as_tibble() %&gt;%
+  rename(full_state = `State/Possession`, abbreviation = Abbreviation) %&gt;% # I prefer lowercase nomenclature
+  mutate(full_state = tolower(full_state))</code></pre>
+<p>I learnt how to map spatial data in R using the following fantastically humorous <a href="https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html">link</a>. Do take a look if you are curious!</p>
+<p>First, let’s derive the longitude-latitude data from the <code>map_data</code> function in <code>ggplot2</code> - we’ll then perform an inner join on this table with the abbreviations we derived above. This will join both tables according to their common column name (in this case the full state names) and augment the state information with the relevant abbreviations:</p>
+<pre class="r"><code>us_states &lt;- map_data(&#39;state&#39;) %&gt;%
+  as_tibble() %&gt;%
+  inner_join(us_state_abbrevs, by = c(&quot;region&quot; = &quot;full_state&quot;))
+
+prison_mutated &lt;- prison_raw %&gt;%
+  filter(population != 0, !is.na(population),
+         prison_population != 0, !is.na(prison_population)) %&gt;%
+  mutate(pop_category = ifelse(pop_category == &quot;Black&quot;, pop_category, &quot;Other&quot;), 
+         imp_rate = prison_population / population) %&gt;%
+  group_by(state, pop_category) %&gt;%
+  summarise(avg_imp_rate = mean(imp_rate, na.rm = TRUE)) %&gt;%
+  ungroup() %&gt;%
+  right_join(us_states, by = c(&quot;state&quot; = &quot;abbreviation&quot;))</code></pre>
+<p>Let’s see how the imprisonment rate varies across the USA split by state:</p>
+<pre class="r"><code>ggplot() +
+  geom_polygon(data = prison_mutated %&gt;% filter(pop_category == &quot;Black&quot;), 
+               mapping = aes(x = long, y = lat, group = group, fill = avg_imp_rate)) +
+  geom_label(data = prison_mutated %&gt;% filter(pop_category == &quot;Black&quot;, avg_imp_rate &gt; 0.10) %&gt;% distinct(region, .keep_all = TRUE),
+             mapping = aes(label = region, x = long, y = lat)) +
+  theme_void() +
+  scale_fill_gradient2(low = &quot;slateblue2&quot;, high = &quot;tomato2&quot;, midpoint = 0.075, labels = scales::percent_format()) +
+  labs(fill = &quot;Imprisonment Rate&quot;,
+       title = &quot;African American imprisonment rates across the USA: 1970 - 2016&quot;,
+       subtitle = &quot;The highest are in Nebraska and Utah - some states are missing data&quot;) </code></pre>
+<p><img src="/post/2019-04-02-incarceration-rates-in-the-usa_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Based on the plot above, we have identified two locations in the US with particularly high imprisonment rates pertaining to African Americans. Another question we an explore is which areas have shown the most change (good or bad) over time? To answer this we can look at the <em>standard deviation</em> of African American incarceration rates associated with each state over time:</p>
+<pre class="r"><code>highly_variable_states &lt;- prison_raw %&gt;%
+  filter(population != 0, !is.na(population),
+         prison_population != 0, !is.na(prison_population)) %&gt;%
+  mutate(imp_rate = prison_population / population) %&gt;%
+  filter(pop_category == &quot;Black&quot;) %&gt;%
+  group_by(state) %&gt;%
+  summarise(sd_imp_rate = sd(imp_rate, na.rm = TRUE)) %&gt;%
+  arrange(desc(sd_imp_rate))
+
+highly_variable_states</code></pre>
+<pre><code>## # A tibble: 40 x 2
+##    state sd_imp_rate
+##    &lt;chr&gt;       &lt;dbl&gt;
+##  1 NE         1.31  
+##  2 NC         0.477 
+##  3 UT         0.420 
+##  4 TN         0.202 
+##  5 OK         0.146 
+##  6 MO         0.0832
+##  7 WI         0.0760
+##  8 SD         0.0460
+##  9 IL         0.0456
+## 10 IN         0.0383
+## # ... with 30 more rows</code></pre>
+<p>We could examine the evolution of imprisonment rates in these particular states - were there any particularly large spikes? If so, why?</p>
+<pre class="r"><code>top_five_states &lt;- prison_raw %&gt;%
+  filter(population != 0, !is.na(population),
+         prison_population != 0, !is.na(prison_population)) %&gt;%
+  mutate(imp_rate = prison_population / population) %&gt;%
+  filter(pop_category == &quot;Black&quot;) %&gt;%
+  group_by(year, state) %&gt;%
+  summarise(avg_imp_rate = mean(imp_rate, na.rm = TRUE)) %&gt;%
+  ungroup() %&gt;%
+  filter(state %in% (highly_variable_states %&gt;% slice(1:5) %&gt;% pull(state)))
+
+ggplot(data = top_five_states, aes(x = year, y = avg_imp_rate, colour = factor(state), group = state)) +
+  geom_point() +
+  geom_line() +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(x = &quot;Year&quot;,
+       y = &quot;Avg proportion of african americans in jail&quot;,
+       colour = &quot;State&quot;,
+       title = &quot;How have imprisonment patterns changed over time?&quot;,
+       subtitle = &quot;States analysed demonstrated the most variation over the period: 1970 - 2016&quot;) +
+  transition_reveal(year)</code></pre>
+<p><img src="/post/2019-04-02-incarceration-rates-in-the-usa_files/figure-html/unnamed-chunk-9-1.gif" /><!-- --></p>
+<p>I’m not so sure whether this quite worked out properly but it’s my first time to use <code>gganimate</code> so there is a good chance I’ve made an error somewhere! Nonetheless, we are able to observe some spikes in imprisonment rates during the late 1990s in Utah and during the late 2000s in Nebraska too. There’s likely some reasoning behind this that I would like to investigate at a later date.</p>
+<p>I wish I could take this analysis further however, given it is a busy time in my life right now, that will have to wait for a later date.</p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

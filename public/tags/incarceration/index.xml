@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Incarceration on Johnny&#39;s Blog</title>
+    <link>/tags/incarceration/</link>
+    <description>Recent content in Incarceration on Johnny&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/incarceration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Incarceration Rates in the USA</title>
+      <link>/2019/04/02/incarceration-rates-in-the-usa/</link>
+      <pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/02/incarceration-rates-in-the-usa/</guid>
+      <description>Introduction The data for this post comes from the Vera institute. It comes as a timely reminder of the racial injustice that still exists in the United States prison system. If anyone is looking to learn more about this topic, then I recommend watching the documentary ‘13th’ - the name refers to the Thirteenth Amendment of the United States Constitution, which abolished slavery throughout the United States and ended involuntary servitude except as a punishment for a crime.</description>
+    </item>
+    
+  </channel>
+</rss>
