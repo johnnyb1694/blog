@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Data Science on Johnny&#39;s Blog</title>
-    <link>/categories/data-science/</link>
-    <description>Recent content in Data Science on Johnny&#39;s Blog</description>
+    <title>Politics on Johnny&#39;s Blog</title>
+    <link>/tags/politics/</link>
+    <description>Recent content in Politics on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/data-science/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/politics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</guid>
       <description>Preamble on ‘Project Gutenberg’ It’s been a little while since I’ve practiced text mining so I thought I would analyse some textual data provided by Project Gutenberg. In case you were not aware, Project Gutenberg consists of various articles and literary contributions (amongst other things) written, in the main, by authors whose works are now in the US public domain and largely exempt from any copyright infringement. For the UK, the law is that copyright applies to somebody else’s work until 70 years after their date of death.</description>
-    </item>
-    
-    <item>
-      <title>Incarceration Rates in the USA</title>
-      <link>/2019/04/02/incarceration-rates-in-the-usa/</link>
-      <pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/04/02/incarceration-rates-in-the-usa/</guid>
-      <description>Introduction The data for this post comes from the Vera institute. It comes as a timely reminder of the racial injustice that still exists in the United States prison system. If anyone is looking to learn more about this topic, then I recommend watching the documentary ‘13th’ - the name refers to the Thirteenth Amendment of the United States Constitution, which abolished slavery throughout the United States and ended involuntary servitude except as a punishment for a crime.</description>
     </item>
     
   </channel>

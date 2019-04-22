@@ -6,10 +6,19 @@
     <description>Recent content in Tidyverse on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Exploring the speeches and letters of Abraham Lincoln</title>
+      <link>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</link>
+      <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</guid>
+      <description>Preamble on ‘Project Gutenberg’ It’s been a little while since I’ve practiced text mining so I thought I would analyse some textual data provided by Project Gutenberg. In case you were not aware, Project Gutenberg consists of various articles and literary contributions (amongst other things) written, in the main, by authors whose works are now in the US public domain and largely exempt from any copyright infringement. For the UK, the law is that copyright applies to somebody else’s work until 70 years after their date of death.</description>
+    </item>
     
     <item>
       <title>Captive Cetaceans - Mortality Investigation</title>

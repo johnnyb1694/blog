@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</loc>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2019/04/02/incarceration-rates-in-the-usa/</loc>
     <lastmod>2019-04-02T00:00:00+00:00</lastmod>
   </url>
@@ -29,13 +34,13 @@
   
   <url>
     <loc>/categories/data-science/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/data-science/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -47,13 +52,25 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/lincoln/</loc>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/politics/</loc>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -65,13 +82,13 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -89,25 +106,25 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/tidytext/</loc>
-    <lastmod>2019-03-16T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/tidyverse/</loc>
-    <lastmod>2019-03-30T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/usa/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
