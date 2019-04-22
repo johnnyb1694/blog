@@ -64,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">15 min read</span>
+    <span class="article-duration">16 min read</span>
     
 
     <h1 class="article-title">Exploring the speeches and letters of Abraham Lincoln</h1>
@@ -268,12 +268,7 @@ lincoln_text_4143[1,2, drop = TRUE] %&gt;% str_sub(start = 1L, end = 1000L)</cod
 <pre><code>## [1] &quot;resolutions whig meeting springfield illinois march object meeting stated springfield offered resolutions unanimously adopted resolved tariff duties imported producing sufficient revenue payment expenditures national government adjusted protect american industry indispensably prosperity american people resolved opposed direct taxation support national government resolved national bank properly restricted highly proper establishment maintenance sound currency cheap safe collection keeping disbursing public revenue resolved distribution proceeds sales public lands principles clay&#39;s bill accords nation illinois resolved recommend whigs congressional district nominate support approaching election candidate principles chances success resolved recommend whigs portions adopt rigidly adhere convention system nominating candidates resolved recommend whigs congressional district hold district convention monday composed delegates county equal double representatives assembly provided county delega&quot;</code></pre>
 <p>The printouts above show the words which make up the first 1,000 characters of writings in 1841 and 1843 respectively. It’s clear to see that the former could be considered to be much more ‘negative’ in its word composition than the latter. Lincoln is clearly discussing being ‘miserable’ and suffering from possible ‘depression’ - we see words like ‘risk’, ‘fall’ and ‘loss’ too. By contrast, the second writing is completely different - this is a writing about the adoption of an agreed political policy with seeming ‘success’.</p>
 <p>I did a little more digging online about the letters Lincoln wrote during 1841 and came across the following letter to John Stuart (a prominent lawyer in the USA at the time), the content of which appears to match the printout above:</p>
-<div class="figure"><span id="fig:unnamed-chunk-11"></span>
-<img src="/Users/Johnny/Desktop/Misc./Lincoln_to_Stuart.png" alt="Lincoln's letter to John Stuart" width="100%" />
-<p class="caption">
-Figure 1: Lincoln’s letter to John Stuart
-</p>
-</div>
+<p><em>For not giving you a general summary of news, you must pardon me; it is not in my power to do so. I am now the most miserable man living. If what I feel were equally distributed to the whole human family, there would not be one cheerful face on earth. Whether I shall ever be better, I cannot tell; I awfully forebode I shall not. To remain as I am is impossible; I must die or be better, it appears to me. The matter you speak of on my account you may attend to as you say, unless you shall hear of my condition forbidding it. I say this because I fear I shall be unable to attend to any business here, and a change of scene might help me. If I could be myself, I would rather remain at home with Judge Logan. I can write no more.</em></p>
 <p>According to <a href="http://housedivided.dickinson.edu/sites/lincoln/letter-to-john-stuart-january-23-1841/">this source</a>, the cause of Lincoln’s depression at the time “resulted entirely from the situation he . . . got himself into – he was engaged to Miss Todd, and in love with Miss Edwards, and his conscience troubled him dreadfully for the supposed injustice he had done, and the supposed violation of his word which he had committed”.</p>
 </div>
 <div id="growing-and-shrinking-themes" class="section level2">
@@ -352,7 +347,7 @@ lincoln_counts %&gt;%
        title = &quot;Top 10 highest growing words&quot;,
        subtitle = &quot;&#39;war&#39; and &#39;washington&#39; make noticeable appearances&quot;,
        caption = &quot;Source: &#39;Project Gutenberg&#39; archive&quot;)</code></pre>
-<p><img src="/post/2019-04-22-exploring-the-speeches-and-letters-of-abraham-lincoln_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/post/2019-04-22-exploring-the-speeches-and-letters-of-abraham-lincoln_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <pre class="r"><code># words which Lincoln started to use less frequently towards the end of his writings
 lincoln_counts %&gt;%
   filter(word %in% lincoln_top_shrinking) %&gt;%
@@ -365,7 +360,7 @@ lincoln_counts %&gt;%
      title = &quot;Top 10 highest shrinking words&quot;,
      subtitle = &quot;Themes of liberty, such as &#39;free&#39; and &#39;slavery&#39;, appear to decrease in usage over time&quot;,
      caption = &quot;Source: &#39;Project Gutenberg&#39; archive&quot;)</code></pre>
-<p><img src="/post/2019-04-22-exploring-the-speeches-and-letters-of-abraham-lincoln_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p><img src="/post/2019-04-22-exploring-the-speeches-and-letters-of-abraham-lincoln_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
 <p>After a little bit of research, it doesn’t surprise me that ‘slavery’ became much less prominent post 1860. One hypothesis I have (perhaps naively) is that the American Civil War broke out in 1861, by which point Lincoln had exhausted his thoughts on slavery and now found himself in a brutal war over the issue. The breakout of the war also goes some way to explain why words like ‘war’ and ‘washington’ shot up in prominence post 1860 - this might also explain the word ‘received’ as a potential correlator with war.</p>
 </div>
 </div>
