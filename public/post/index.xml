@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rapid analysis of student-teacher ratios worldwide</title>
+      <link>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</link>
+      <pubDate>Wed, 22 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</guid>
+      <description>Introduction In this segment we perform a brief analysis of data on student-teacher ratios across countries worldwide - the data is from the tidytuesday segment on github.
+Limited by time constraints and actuarial exams, this is a relatively short post; however, it showcases some of the functional tools you can use in purrr to make your code more powerful.
+ Data import Let’s first read in the data from the github repo:</description>
+    </item>
     
     <item>
       <title>Exploring the speeches and letters of Abraham Lincoln</title>
@@ -18,6 +29,16 @@
       
       <guid>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</guid>
       <description>Preamble on ‘Project Gutenberg’ It’s been a little while since I’ve practiced text mining so I thought I would analyse some textual data provided by Project Gutenberg. In case you were not aware, Project Gutenberg consists of various articles and literary contributions (amongst other things) written, in the main, by authors whose works are now in the US public domain and largely exempt from any copyright infringement. For the UK, the law is that copyright applies to somebody else’s work until 70 years after their date of death.</description>
+    </item>
+    
+    <item>
+      <title>Why Chinese then Johnny?</title>
+      <link>/2019/04/22/why-chinese/</link>
+      <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/22/why-chinese/</guid>
+      <description>Diem Carpe? One of my all-time favourite scenes in popular cinema comes from Richard Linklater&amp;rsquo;s film &amp;ldquo;Boyhood&amp;rdquo;. In it, the protagonist (Mason) concedes that he is constantly &amp;lsquo;seized&amp;rsquo; by the moment, rather than the &amp;lsquo;moment&amp;rsquo; being seized by him and I often feel the same way about my life. So many things have happened to me that weren&amp;rsquo;t pre-conceived on my part.
+Indeed, when I am asked (regularly) why I chose to learn Chinese of all languages, my answer, as cliche as it sounds, is that Chinese probably chose me and I ran with it - much the same way in which the moment seized the character Mason.</description>
     </item>
     
     <item>
@@ -46,6 +67,15 @@
       <guid>/2019/03/16/exploratory-analysis-of-trump-tweets/</guid>
       <description>Introduction The data that I have chosen to analyse in this document is a repository of Trump tweets which span roughly two years of data all the way up until Trump’s election as US president in November 2016. The original CSV file I have used in the following analysis can be found here on Kaggle.
  Credits My analysis of Trump’s tweets draws a substantial amount of insight from David Robinson’s recent screencast where he analysed a repository of medium articles - that specific screencast can be found here and I highly encourage anyone interested in text mining to watch it at their next available moment.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/1/01/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/1/01/01/</guid>
+      <description>The logic of Chinese       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
     </item>
     
   </channel>

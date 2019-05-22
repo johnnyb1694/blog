@@ -6,10 +6,21 @@
     <description>Recent content in R on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rapid analysis of student-teacher ratios worldwide</title>
+      <link>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</link>
+      <pubDate>Wed, 22 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</guid>
+      <description>Introduction In this segment we perform a brief analysis of data on student-teacher ratios across countries worldwide - the data is from the tidytuesday segment on github.
+Limited by time constraints and actuarial exams, this is a relatively short post; however, it showcases some of the functional tools you can use in purrr to make your code more powerful.
+ Data import Let’s first read in the data from the github repo:</description>
+    </item>
     
     <item>
       <title>Exploring the speeches and letters of Abraham Lincoln</title>

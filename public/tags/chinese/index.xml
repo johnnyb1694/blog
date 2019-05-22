@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chinese on Johnny&#39;s Blog</title>
+    <link>/tags/chinese/</link>
+    <description>Recent content in Chinese on Johnny&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/chinese/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Why Chinese then Johnny?</title>
+      <link>/2019/04/22/why-chinese/</link>
+      <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/22/why-chinese/</guid>
+      <description>Diem Carpe? One of my all-time favourite scenes in popular cinema comes from Richard Linklater&amp;rsquo;s film &amp;ldquo;Boyhood&amp;rdquo;. In it, the protagonist (Mason) concedes that he is constantly &amp;lsquo;seized&amp;rsquo; by the moment, rather than the &amp;lsquo;moment&amp;rsquo; being seized by him and I often feel the same way about my life. So many things have happened to me that weren&amp;rsquo;t pre-conceived on my part.
+Indeed, when I am asked (regularly) why I chose to learn Chinese of all languages, my answer, as cliche as it sounds, is that Chinese probably chose me and I ran with it - much the same way in which the moment seized the character Mason.</description>
+    </item>
+    
+  </channel>
+</rss>
