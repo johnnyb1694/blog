@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.54.0" />
+
+
+<title>Why your password isn’t safe - Johnny&#39;s Blog</title>
+<meta property="og:title" content="Why your password isn’t safe - Johnny&#39;s Blog">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/yin-yang.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">Posts</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/johnnyb1694">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/johnnybreen/">LinkedIn</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">5 min read</span>
+    
+
+    <h1 class="article-title">Why your password isn’t safe</h1>
+
+    
+    <span class="article-date">2020-01-27</span>
+    
+
+    <div class="article-content">
+      
+
+
+<blockquote>
+<p>“Steve is very shy and withdrawn, invariably helpful but with little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.”</p>
+</blockquote>
+<p>In his seminal book, “Thinking Fast and Slow”, Daniel Kahneman - referring to this short paragraph - poses the following question: is Steve more likely to be a librarian or a farmer? If you’re like 90% of other people, your immediate response is likely to settle on ‘librarian’.</p>
+<p>But, why exactly is this? The answer lies in something called the ‘associative memory’. Each and every time you observe a description like this, your associative memory almost instantaneously connects Steve’s personality traits with your conception of what a librarian is.</p>
+<p>The problem with this approach, however, is that it rarely aligns with statistical truths. Did you know, for example, that there are five times as many farmers as librarians in the United States? What if I told you that, in addition to this, the ratio of male farmers to male librarians is even higher? Suddenly, the question of Steve’s identity becomes much harder to answer.</p>
+<p>Interestingly, during my brief foray into the world of password creation I have discovered that this phenomenon is endemic to the wider scope of human decision-making. Consider the following choices of passwords:</p>
+<p>(Insert graphical device here showing ‘Tr0ub4dor&amp;3’ and ‘correcthorsebatterystaple’)</p>
+<p>Most people, if forced into a choice, would opt for the first. If you’re one of these people, you’d be taking a risk. You might be wondering at this point how a password with no special characters or numbers could be considered to be stronger. It’s to do with something called ‘entropy’.</p>
+<p>Think of entropy as ‘information’. Every password encodes a certain level of information - the higher this level is, the stronger your password is. Generally speaking, the longer your password is the more entropy or information it has. That’s why option 2 is better: it’s longer. It also doesn’t rely on obvious substitutions like ‘0’ for ‘O’ or ‘4’ for ‘A’. Put yourself in the shoes of a hacker: do you really think they don’t know these tricks?</p>
+<p>A longer password is bad news for hackers because they like to ‘brute-force’ password combinations until they hit a match. If they have to work through more combinations then it’s much harder for them to brute-force your password - a random password of length 25 that draws from a character set of 36 (as in option 2) has 36^25 possible combinations.</p>
+<p>Given the increasingly prevalent risk of hacking, then, you might have assumed that people were fairly sensible about password creation. Turns out this isn’t quite true. I’ve had the (mis)fortune of analysing some data on so-called ‘bad passwords’ over the last couple of weeks or so and the results are fairly grim. See for yourself:</p>
+<p>(Insert graph on worst passwords here)</p>
+<p>The password ‘password’ is a particular highlight for me, although not as uncommon as you might think (insert source here). If this is you, then please - for the sake of your security - change your password right now. Dr Mike Pound (insert source here) has gone a step further than me and suggested that such individuals delete their account purely out of shame but I’m a bit kinder and will issue a warning first.</p>
+<p>If there were anything worse than choosing a password-related password, it would have to be using your username or name as your password. I like to name and shame those who deserve it so here’s a list of some of the worst culprits:</p>
+<p>(Insert graph here)</p>
+<p>It’s difficult to get across to people just how poor passwords like these are. A name like ‘mike’ is 4 characters long. If a hacker managed to access a database with Mike’s profile in it, they’d only have to go through roughly 1.7 million combinations in order to crack it. To put this into perspective, Triaxiom Security build a cracking machine worth just $5,000 which could attempt 3 billion password guesses per second.</p>
+<p>Of course, most databases nowadays demand users to change things up a bit - you can’t choose a password of 8 characters or less and you often have to include at least one special character. Even with 8 characters, however, the Triaxiom Security build would still be able to crack your password within the scope of 3 days.</p>
+<p>Whilst protecting your password against brute force attacks is all well and good, something you also have to keep in mind is whether your password is ‘dictionary-crackable’. This is where option 2 of our initial example falls down slightly - ‘correct’, ‘horse’, ‘battery’ and ‘staple’ are probably in the top 10,000 most used English words. Including common words in your password negates the strength of your password slightly, even in the case of so-called ‘bad passwords’:</p>
+<p>(Insert graph here)</p>
+<p>A good strategy, as recommended by Dr Mike Pound in his excellent video on passwords (insert source here), is to randomly include a special character within the middle of one of the words. For example, ‘correctho?rsebatterystaple’ almost acts as protection against dictionary-based cracking and has the beneficial effect of transforming your password into something that can only really be solved by methods of brute force.</p>
+<p>If you are finding all of these rules overly prescriptive and hard to follow just remember, as alluded to already, the length of your password is the most important factor. The majority of these so-called ‘bad passwords’ tended to be 7 characters or less. Such passwords are much easier to crack using an offline brute-force method as can be observed in the summary graph below:</p>
+<p>(Insert graph here)</p>
+<p>So, what makes a good password? Here are some rules you can follow next time you have to make that choice:</p>
+<p>Use a password manager. I highly advise you to look into this at your next available moment Prioritise the length of your password above all else and never opt for any password that is less than 8 characters long. Longer passwords are much, much harder to crack! Include special characters between component words to avoid dictionary cracking Capitalise random parts of each component word in your password Avoid common dictionary-based words</p>
+<p>If you follow these rules then you can be fairly confident that you probably won’t get hacked!</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

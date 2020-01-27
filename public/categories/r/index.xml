@@ -6,10 +6,20 @@
     <description>Recent content in R on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Why your password sucks</title>
+      <link>/2020/01/27/why-your-password-sucks/</link>
+      <pubDate>Mon, 27 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/01/27/why-your-password-sucks/</guid>
+      <description>A story about ‘Steve’  “Steve is very shy and withdrawn, invariably helpful but with little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail.”
+ In his seminal work, “Thinking Fast and Slow”, Daniel Kahneman - referring to this short description - poses the following question: is Steve more likely to be a librarian or a farmer?</description>
+    </item>
     
     <item>
       <title>Rapid analysis of student-teacher ratios worldwide</title>

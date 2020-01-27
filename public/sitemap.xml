@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2020/01/27/why-your-password-sucks/</loc>
+    <lastmod>2020-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</loc>
     <lastmod>2019-05-22T00:00:00+00:00</lastmod>
   </url>
@@ -38,13 +43,13 @@
   </url>
   
   <url>
-    <loc>/tags/data-science/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
+    <loc>/categories/data-science/</loc>
+    <lastmod>2020-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/data-science/</loc>
+    <loc>/tags/data-science/</loc>
     <lastmod>2019-05-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -57,7 +62,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -75,7 +80,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -86,13 +91,13 @@
   </url>
   
   <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
+    <loc>/tags/r/</loc>
     <lastmod>2019-05-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
