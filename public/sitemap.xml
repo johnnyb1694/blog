@@ -8,31 +8,6 @@
   </url>
   
   <url>
-    <loc>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</loc>
-    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2019/04/02/incarceration-rates-in-the-usa/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2019/03/30/captive-cetaceans-mortality-investigation/</loc>
-    <lastmod>2019-03-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2019/03/16/exploratory-analysis-of-trump-tweets/</loc>
-    <lastmod>2019-03-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/about/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
   </url>
@@ -43,20 +18,8 @@
   </url>
   
   <url>
-    <loc>/tags/data-science/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/data-science/</loc>
     <lastmod>2020-01-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/incarceration/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -67,32 +30,8 @@
   </url>
   
   <url>
-    <loc>/tags/lincoln/</loc>
-    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/politics/</loc>
-    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/post/</loc>
     <lastmod>2020-01-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/prison-system/</loc>
-    <lastmod>2019-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -103,44 +42,7 @@
   </url>
   
   <url>
-    <loc>/tags/r-markdown/</loc>
-    <lastmod>2019-03-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/survival-analysis/</loc>
-    <lastmod>2019-03-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/teaching/</loc>
-    <lastmod>2019-05-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/tidytext/</loc>
-    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/tidyverse/</loc>
-    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/usa/</loc>
-    <lastmod>2019-04-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
