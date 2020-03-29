@@ -1,0 +1,255 @@
+---
+title: The perils of medical testing
+author: Johnny
+date: '2020-03-29'
+slug: the-perils-of-medical-testing
+categories:
+  - R
+tags:
+  - data science
+  - r
+  - epidemiology
+  - biology
+  - coronavirus
+  - covid-19
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+# Preliminaries ----
+req_pkgs <- c("tidyverse", "scales")
+
+for (pkg in req_pkgs) {
+  if (!pkg %in% installed.packages()){
+    install.packages(pkg, dependencies = T)
+  }
+  library(pkg, character.only = T)
+}
+
+extrafont::loadfonts()
+theme_set(theme_light(base_size = 12, base_family = "Arial"))
+
+# Input parameters ----
+
+# Under the following assumptions, the posterior probability of being positive is only around ~ 56%
+disease_coverage <- 0.05
+test_accuracy <- 0.98
+false_positive_rate <- 0.04
+
+# Calculation ----
+
+compute_posterior <- function(p_A, p_BA, p_BAc) {
+  p_Ac <- 1 - p_A
+  
+  (p_A * p_BA) / ((p_A * p_BA) + (p_BAc * p_Ac))
+}
+
+# Visual explanation ----
+
+# Imagine that our population consists of 10,000 individuals. This means that there are 500 individuals carrying 
+# the fictitious disease in our population. We apply our test to the entire population.
+population_size <- 1000
+
+v <- rep(55, 100)
+
+for (s in seq(100, 60, -5)) {
+  # Don't copy this practice! It's a short-term fix
+  v <- c(v, rep(s, 100))
+}
+
+population_data <- tibble(individual = 1:population_size, 
+                          actual_status = c(rep("Carrier", 0.05*population_size), rep("Healthy", 0.95 * population_size)),
+                          x = rep(seq(1, 100), 10),
+                          y = v)
+```
+
+You've been feeling under the weather for more than a couple of days and things don't seem to be improving. So, you pluck up the courage to call your local doctor. He tells you that it's probably just an innocuous virus but he decides to run a series of remote tests on you regardless, 'just to be safe'. 
+
+The next day you receive your results: your doctor informs you that you have tested positive for a very serious disease that only affects approximately 5% of the global population.
+
+"The test", your doctor informs you, "is 98% accurate. I should also say that this test is only wrong 4 times out of 100 on otherwise healthy patients. I'm sorry."
+
+You fall to your knees: "98% accurate? It's got to be right, surely?"
+
+Or is it?
+
+# So, am I positive or not?
+
+This classic question has, by now, been etched into the minds of mathematics & statistics students across the globe. This is primarily because the answer demonstrates just how poor our intuition of probability really is.
+
+The test, as mentioned, is able to identify carriers with an accuracy of 98% - scientists often call this the 'sensitivity' of a medical test. So, you may have assumed that your chances of carrying the disease are, accordingly, 98%. But this is with reference to people who already *have* the disease. 
+
+Indeed, rather counter-intuitively, the *actual* probability of you being positive is closer to 56.3%.
+
+# Visualising the problem
+
+At first, this answer doesn't make sense. How can it be that a test with a accuracy of 98% can yield such wild results?
+
+To see why, it helps to visualise the situation. Imagine that our population consists of 1,000 individuals. Our doctor told us that this virus only affects roughly 5% of the population - this means that there are 50 individuals carrying the fictitious disease in our population (the remaining 950 are healthy):
+
+```{r echo=FALSE}
+population_data %>%
+  ggplot(aes(x, y)) +
+  geom_point(aes(colour = actual_status), shape = 1) +
+  theme_void() +
+  labs(title = "Our population*",
+       subtitle = "The red dots represent the actual carriers of the disease",
+       caption = "*population visualisation is restricted to 1,000 individuals for illustrative purposes",
+       colour = "Actual status") +
+  theme(plot.title = element_text(size = 15, face = "bold"),
+        plot.caption = element_text(size = 8, colour = "gray50"),
+        panel.grid = element_blank())
+```
+
+We now proceed to test the entire population. Remember, we have 50 disease carriers and 950 healthy individuals. 
+
+The test is 98% accurate on those who have the disease - so 49 out of the 50 carriers will test positive and 1 case will test negative (even though they're positive). Similarly, your doctor has told you that the test is only wrong '4 times out of 100 on otherwise healthy individuals'. This is a 'false positive' rate of 4%. So of the 950 healthy individuals, 38 individuals will unfortunately come back positive (even though they're negative).
+
+The current situation now looks like this:
+
+```{r echo=FALSE}
+population_data %>%
+  mutate(test_result = c(rep("Positive", 49), "Negative", rep("Positive", 38), rep("Negative", 912))) %>%
+  ggplot(aes(x, y)) +
+  geom_point(aes(colour = actual_status, shape = test_result)) +
+  theme_void() + 
+  scale_shape_manual(values = c(1, 3)) +
+  labs(title = "Our population*: test results",
+       subtitle = "Notice how we have incorrectly classified a relatively large number of healthy cases as positive",
+       caption = "*population visualisation is restricted to 1,000 individuals for illustrative purposes",
+       colour = "Actual status",
+       shape = "Test result") +
+  theme(plot.title = element_text(size = 15, face = "bold"),
+        plot.caption = element_text(size = 8, colour = "gray50"),
+        panel.grid = element_blank())
+```
+
+If we now 'zoom in' on cases which have tested positive, the severity of the situation suddenly becomes more obvious:
+
+```{r echo=FALSE}
+arrows <- tibble(x_start = c(25, 75),
+                 y_start = c(70, 30),
+                 x_end = c(25, 75),
+                 y_end = c(60, 50))
+
+population_data %>%
+  mutate(test_result = c(rep("Positive", 49), "Negative", rep("Positive", 48), rep("Negative", 902))) %>%
+  filter(test_result == "Positive") %>%
+  ggplot(aes(x, y)) +
+  geom_point(aes(colour = actual_status), shape = 3, size = 2.0) +
+  theme_void() +
+  geom_curve(data = arrows, aes(x = x_start, y = y_start, xend = x_end, yend = y_end),
+             arrow = arrow(length = unit(0.08, "inch")), size = 0.5,
+             colour = "gray50", curvature = 0) +
+  scale_alpha(guide = 'none') +
+  labs(title = "Our population*: 'positive' cases",
+       subtitle = "Notice how just over half of these 'positive' cases are actually positive",
+       caption = "*population visualisation is restricted to 1,000 individuals for illustrative purposes",
+       colour = "Actual status") + 
+  theme(plot.title = element_text(size = 15, face = "bold"),
+        plot.caption = element_text(size = 8, colour = "gray50"),
+        panel.grid = element_blank()) +
+  expand_limits(x = c(0, 100), y = c(0, 100)) +
+  annotate("text", x = 25, y = 75, size = 3.0, colour = "gray20", label = "49 / 50 carriers have been identified as positive") +
+  annotate("text", x = 75, y = 25, size = 3.0, colour = "gray20", label = "However, 38 / 950 healthy individuals have\n also been identified as positive")
+```
+
+Now the answer is clear: if you take the number of true positives, 49, and divide it by the total number of people who tested positive, 49 + 38 = 87, then you find that the probability of any given individual actually *being* positive for a disease, given that they tested positive, is roughly 49 / 87 or 56.3%.
+
+# Is this bad?
+
+This counter-intuitive result might seem shocking at first but there is a rationale behind it. 
+
+We touched on the concept of 'sensitivity' earlier - that is, how accurate is the medical test on disease carriers. Scientists also attach importance to the 'specificity' of a medical test - this figure describes how accurate the medical test is on healthy individuals. Unfortunately, there is no medical test that is able to achieve 100% in both of these categories.
+
+In fact, normally there is a trade-off: highly sensitive tests tend to be less specific. Airport security is a prime example of this. Scanners are set to trigger on low-risk items such as belt buckles and keys (a low-specificity test); however, this ensures that those same scanners will almost always be triggered by more dangerous items (a high-sensitivity test).
+
+Outcomes of medical tests on healthy individuals are highly influenced by their specificity. In the aforementioned example, you can visualise just how drastically the probability of misdiagnosing healthy individuals changes in line with the false-positive rate of the test:
+
+```{r echo=FALSE}
+# In fact, the posterior probability is incredibly sensitive to the false positive rate (which is directly related
+# to the 'specificity' of the test i.e. the probability of accurately identifying negative patients)
+sensitivity_fp_rate <- tibble(false_positive_sequence = seq(from = 0.01, to = 0.15, by = 0.01), 
+                        posterior_prob = compute_posterior(p_A = disease_coverage,
+                                                           p_BA = test_accuracy,
+                                                           p_BAc = false_positive_sequence))
+
+sensitivity_fp_rate %>%
+  mutate(prob_misdiagnosis = 1 - posterior_prob) %>%
+  ggplot(aes(x = false_positive_sequence,
+             y = prob_misdiagnosis)) +
+  geom_point(aes(colour = 1 - prob_misdiagnosis, size = prob_misdiagnosis), show.legend = F) +
+  geom_line(alpha = 0.25, show.legend = F) +
+  scale_colour_continuous(low = "tomato2", high = "slateblue1") +
+  scale_y_continuous(labels = scales::percent_format(),
+                     breaks = seq(0, 1.0, 0.20)) +
+  scale_x_continuous(labels = scales::percent_format(),
+                     breaks = seq(0.01, 0.15, 0.02)) +
+  expand_limits(y = 0) +
+  labs(x = "False positive rate",
+       y = "Probability of misdiagnosing healthy cases",
+       title = "Probability of misdiagnosis versus false positive rate",
+       subtitle = "Tests with a low specificity tend to misdiagnose many healthy cases") + 
+  theme(plot.title = element_text(size = 15, face = "bold"),
+        plot.caption = element_text(size = 8, colour = "gray50"),
+        panel.grid = element_blank())
+
+```
+
+But this is not a bad thing per se. 
+
+Imagine if you administered a test to millions of people which missed 50 out of every 1000 carriers, a sensitivity (accuracy) rate of 95% but was able to correctly diagnose 999 out of every 1,000 healthy individuals. This is bad - we don't want to miss 50 carriers out of every 1,000 in the context of infectious viruses such as COVID-19.
+
+However, if you could optimise the test so that it only missed out on 5 out of every 1,000 carriers, but misdiagnosed, say, 950 out of every 1,000 individuals then you'd be in a much safer position.
+
+Overall, it is probably better to misdiagnose healthy individuals than potential disease carriers.
+
+# What about disease prevalence?
+
+One factor that scientists have little control over is how prevalent the disease is in the population. This is currently a very difficult question to answer in the case of COVID-19 but there is already extensive research suggesting that the true number of cases is likely to be far in excess of official numbers. 
+
+As tragic as these milestones are, the widespread prevalence of a disease is instrumental in how accurate a medical test can be on healthy individuals:
+
+```{r echo=FALSE}
+# However, another important factor is how prevalent the underlying disease is in the population.
+# The more common it is, the less chance we have of identifying false positive cases.
+sensitivity_coverage <- tibble(coverage_sequence = seq(from = 0.01, to = 0.15, by = 0.01), 
+                              posterior_prob = compute_posterior(p_A = coverage_sequence,
+                                                                 p_BA = test_accuracy,
+                                                                 p_BAc = false_positive_rate))
+
+sensitivity_coverage %>%
+  mutate(prob_misdiagnosis = 1 - posterior_prob) %>%
+  ggplot(aes(x = coverage_sequence,
+             y = prob_misdiagnosis)) +
+  geom_point(aes(colour = 1 - prob_misdiagnosis, size = prob_misdiagnosis), show.legend = F) +
+  geom_line(alpha = 0.25, show.legend = F) +
+  scale_colour_continuous(low = "tomato2", high = "slateblue1") +
+  scale_y_continuous(labels = scales::percent_format(),
+                     breaks = seq(0, 1.0, 0.20)) +
+  scale_x_continuous(labels = scales::percent_format(),
+                     breaks = seq(0.01, 0.15, 0.02)) +
+  expand_limits(y = 0) +
+  labs(x = "Prevalence of disease (amongst population)",
+       y = "Probability of misdiagnosing healthy case",
+       title = "Probability of misdiagnosis versus disease prevalence",
+       subtitle = "Tests aimed at identifying common diseases are generally more easy to rely upon") + 
+  theme(plot.title = element_text(size = 15, face = "bold"),
+        plot.caption = element_text(size = 8, colour = "gray50"),
+        panel.grid = element_blank())
+```
+
+# Bayesian inference
+
+The mechanics behind all of this lies in something called 'statistical inference'. Inferential reasoning has a relatively short history and can be traced back to [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) whose simplicity disguises the profound consequences it has had on the domain of probability & statistics:
+
+$$\mathbb{P}(A | B) = \dfrac{\mathbb{P}(B|A)\mathbb{P}(A)}{\mathbb{P}(B)}$$
+
+The symbol $\mathbb{P}$ is the probability function. Each of $A$ and $B$ are types of 'events'. In our case, if we let $A$ define the event that 'We have the disease' and $B$ define the event that 'We tested positive for the disease' then we can interpret $\mathbb{P}(A|B)$ as 'the probability of having the disease, *given* that we have tested positive'.
+
+This is what we wanted to calculate at the beginning: 'What are the chances that we *actually* have the disease, given that we have tested positive?'
+
+
+
+
+
+

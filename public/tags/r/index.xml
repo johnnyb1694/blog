@@ -6,57 +6,19 @@
     <description>Recent content in R on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Rapid analysis of student-teacher ratios worldwide</title>
-      <link>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</link>
-      <pubDate>Wed, 22 May 2019 00:00:00 +0000</pubDate>
+      <title>The perils of medical testing</title>
+      <link>/2020/03/29/the-perils-of-medical-testing/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/22/rapid-analysis-of-student-teacher-ratios-worldwide/</guid>
-      <description>Introduction In this segment we perform a brief analysis of data on student-teacher ratios across countries worldwide - the data is from the tidytuesday segment on github.
-Limited by time constraints and actuarial exams, this is a relatively short post; however, it showcases some of the functional tools you can use in purrr to make your code more powerful.
- Data import Let’s first read in the data from the github repo:</description>
-    </item>
-    
-    <item>
-      <title>Exploring the speeches and letters of Abraham Lincoln</title>
-      <link>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</link>
-      <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/04/22/exploring-the-speeches-and-letters-of-abraham-lincoln/</guid>
-      <description>Preamble on ‘Project Gutenberg’ It’s been a little while since I’ve practiced text mining so I thought I would analyse some textual data provided by Project Gutenberg. In case you were not aware, Project Gutenberg consists of various articles and literary contributions (amongst other things) written, in the main, by authors whose works are now in the US public domain and largely exempt from any copyright infringement. For the UK, the law is that copyright applies to somebody else’s work until 70 years after their date of death.</description>
-    </item>
-    
-    <item>
-      <title>Incarceration Rates in the USA</title>
-      <link>/2019/04/02/incarceration-rates-in-the-usa/</link>
-      <pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/04/02/incarceration-rates-in-the-usa/</guid>
-      <description>Introduction The data for this post comes from the Vera institute. It comes as a timely reminder of the racial injustice that still exists in the United States prison system. If anyone is looking to learn more about this topic, then I recommend watching the documentary ‘13th’ - the name refers to the Thirteenth Amendment of the United States Constitution, which abolished slavery throughout the United States and ended involuntary servitude except as a punishment for a crime.</description>
-    </item>
-    
-    <item>
-      <title>Captive Cetaceans - Mortality Investigation</title>
-      <link>/2019/03/30/captive-cetaceans-mortality-investigation/</link>
-      <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/03/30/captive-cetaceans-mortality-investigation/</guid>
-      <description>Introduction So, here it is: my first ever contribution to the TidyTuesday project hosted on github! In this post, I am going to analyse a dataset on various cetacean species, originally analysed by Amber Thomas in an excellent Pudding article. Although this dataset is a less recent submission, I chose it because I was interested to learn a bit about the history of cetacean captivity and also their potential future in the context of climate risk.</description>
-    </item>
-    
-    <item>
-      <title>Trump Tweets - Exploratory Analysis</title>
-      <link>/2019/03/16/exploratory-analysis-of-trump-tweets/</link>
-      <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/03/16/exploratory-analysis-of-trump-tweets/</guid>
-      <description>Introduction The data that I have chosen to analyse in this document is a repository of Trump tweets which span roughly two years of data all the way up until Trump’s election as US president in November 2016. The original CSV file I have used in the following analysis can be found here on Kaggle.
- Credits My analysis of Trump’s tweets draws a substantial amount of insight from David Robinson’s recent screencast where he analysed a repository of medium articles - that specific screencast can be found here and I highly encourage anyone interested in text mining to watch it at their next available moment.</description>
+      <guid>/2020/03/29/the-perils-of-medical-testing/</guid>
+      <description>You’ve been feeling under the weather for more than a couple of days and things don’t seem to be improving. So, you pluck up the courage to call your local doctor. He tells you that it’s probably just an innocuous virus but he decides to run a series of remote tests on you regardless, ‘just to be safe’.
+The next day you receive your results: your doctor informs you that you have tested positive for a very serious disease that only affects approximately 5% of the global population.</description>
     </item>
     
   </channel>

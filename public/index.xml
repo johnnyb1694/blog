@@ -6,10 +6,20 @@
     <description>Recent content on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The perils of medical testing</title>
+      <link>/2020/03/29/the-perils-of-medical-testing/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/29/the-perils-of-medical-testing/</guid>
+      <description>You’ve been feeling under the weather for more than a couple of days and things don’t seem to be improving. So, you pluck up the courage to call your local doctor. He tells you that it’s probably just an innocuous virus but he decides to run a series of remote tests on you regardless, ‘just to be safe’.
+The next day you receive your results: your doctor informs you that you have tested positive for a very serious disease that only affects approximately 5% of the global population.</description>
+    </item>
     
     <item>
       <title>Why your password sucks</title>

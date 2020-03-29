@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Data Science on Johnny&#39;s Blog</title>
-    <link>/tags/data-science/</link>
-    <description>Recent content in Data Science on Johnny&#39;s Blog</description>
+    <title>Biology on Johnny&#39;s Blog</title>
+    <link>/tags/biology/</link>
+    <description>Recent content in Biology on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/data-science/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/biology/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
