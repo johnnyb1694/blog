@@ -82,6 +82,34 @@ Indeed, rather counter-intuitively, the *actual* probability of you being positi
 
 # Visualising the problem
 
+```{r echo=FALSE, include=FALSE}
+arrows <- tibble(x_start = c(25, 75),
+                 y_start = c(70, 30),
+                 x_end = c(25, 75),
+                 y_end = c(60, 50))
+
+population_data %>%
+  mutate(test_result = c(rep("Positive", 49), "Negative", rep("Positive", 48), rep("Negative", 902))) %>%
+  filter(test_result == "Positive") %>%
+  ggplot(aes(x, y)) +
+  geom_point(aes(colour = actual_status), shape = 3, size = 2.0) +
+  theme_void() +
+  geom_curve(data = arrows, aes(x = x_start, y = y_start, xend = x_end, yend = y_end),
+             arrow = arrow(length = unit(0.08, "inch")), size = 0.5,
+             colour = "gray50", curvature = 0) +
+  scale_alpha(guide = 'none') +
+  labs(title = "Our population*: 'positive' cases",
+       subtitle = "Notice how just over half of these 'positive' cases are actually positive",
+       caption = "*population visualisation is restricted to 1,000 individuals for illustrative purposes",
+       colour = "Actual status") + 
+  theme(plot.title = element_text(size = 15, face = "bold"),
+        plot.caption = element_text(size = 8, colour = "gray50"),
+        panel.grid = element_blank()) +
+  expand_limits(x = c(0, 100), y = c(0, 100)) +
+  annotate("text", x = 25, y = 75, size = 3.0, colour = "gray20", label = "49 / 50 carriers have been identified as positive") +
+  annotate("text", x = 75, y = 25, size = 3.0, colour = "gray20", label = "However, 38 / 950 healthy individuals have\n also been identified as positive")
+```
+
 At first, this answer doesn't make sense. How can it be that a test with a accuracy of 98% can yield such wild results?
 
 To see why, it helps to visualise the situation. Imagine that our population consists of 1,000 individuals. Our doctor told us that this virus only affects roughly 5% of the population - this means that there are 50 individuals carrying the fictitious disease in our population (the remaining 950 are healthy):
