@@ -29,15 +29,15 @@ tags:
 </div>
 <div id="visualising-the-problem" class="section level1">
 <h1>Visualising the problem</h1>
-<p>At first, this answer doesn’t make sense. How can it be that a test with a accuracy of 98% can yield such wild results?</p>
+<p>At first, this answer doesn’t make sense. How can it be that a test with an accuracy of 98% can yield such wild results?</p>
 <p>To see why, it helps to visualise the situation. Imagine that our population consists of 1,000 individuals. Our doctor told us that this virus only affects roughly 5% of the population - this means that there are 50 individuals carrying the fictitious disease in our population (the remaining 950 are healthy):</p>
-<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>We now proceed to test the entire population. Remember, we have 50 disease carriers and 950 healthy individuals.</p>
 <p>The test is 98% accurate on those who have the disease - so 49 out of the 50 carriers will test positive and 1 case will test negative (even though they’re positive). Similarly, your doctor has told you that the test is only wrong ‘4 times out of 100 on otherwise healthy individuals’. This is a ‘false positive’ rate of 4%. So of the 950 healthy individuals, 38 individuals will unfortunately come back positive (even though they’re negative).</p>
 <p>The current situation now looks like this:</p>
-<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>If we now ‘zoom in’ on cases which have tested positive, the severity of the situation suddenly becomes more obvious:</p>
 <p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>If we now ‘zoom in’ on cases which have tested positive, the severity of the situation suddenly becomes more obvious:</p>
+<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Now the answer is clear: if you take the number of true positives, 49, and divide it by the total number of people who tested positive, 49 + 38 = 87, then you find that the probability of any given individual actually <em>being</em> positive for a disease, given that they tested positive, is roughly 49 / 87 or 56.3%.</p>
 </div>
 <div id="is-this-bad" class="section level1">
@@ -46,22 +46,24 @@ tags:
 <p>We touched on the concept of ‘sensitivity’ earlier - that is, how accurate is the medical test on disease carriers. Scientists also attach importance to the ‘specificity’ of a medical test - this figure describes how accurate the medical test is on healthy individuals. Unfortunately, there is no medical test that is able to achieve 100% in both of these categories.</p>
 <p>In fact, normally there is a trade-off: highly sensitive tests tend to be less specific. Airport security is a prime example of this. Scanners are set to trigger on low-risk items such as belt buckles and keys (a low-specificity test); however, this ensures that those same scanners will almost always be triggered by more dangerous items (a high-sensitivity test).</p>
 <p>Outcomes of medical tests on healthy individuals are highly influenced by their specificity. In the aforementioned example, you can visualise just how drastically the probability of misdiagnosing healthy individuals changes in line with the false-positive rate of the test:</p>
-<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>But this is not a bad thing per se.</p>
-<p>Imagine if you administered a test to millions of people which missed 50 out of every 1000 carriers, a sensitivity (accuracy) rate of 95% but was able to correctly diagnose 999 out of every 1,000 healthy individuals. This is bad - we don’t want to miss 50 carriers out of every 1,000 in the context of infectious viruses such as COVID-19.</p>
-<p>However, if you could optimise the test so that it only missed out on 5 out of every 1,000 carriers, but misdiagnosed, say, 950 out of every 1,000 individuals then you’d be in a much safer position.</p>
-<p>Overall, it is probably better to misdiagnose healthy individuals than potential disease carriers.</p>
+<p>Imagine if you administered a test to millions of people which missed 50 out of every 1000 carriers (95% sensitivity or accuracy) but was able to correctly diagnose 999 out of every 1,000 healthy individuals (99.9% specificity). This is bad - we don’t want to miss 50 carriers out of every 1,000 in the context of infectious viruses such as COVID-19.</p>
+<p>However, if you could optimise the test so that it only missed out on 5 out of every 1,000 carriers (99.5% sensitivity), but misdiagnosed, say, 50 out of every 1,000 healthy individuals (95% specificity) then you’d be in a much safer position.</p>
+<p>Overall, it is better to misdiagnose healthy individuals than to misdiagnose potential disease carriers.</p>
 </div>
 <div id="what-about-disease-prevalence" class="section level1">
 <h1>What about disease prevalence?</h1>
 <p>One factor that scientists have little control over is how prevalent the disease is in the population. This is currently a very difficult question to answer in the case of COVID-19 but there is already extensive research suggesting that the true number of cases is likely to be far in excess of official numbers.</p>
 <p>As tragic as these milestones are, the widespread prevalence of a disease is instrumental in how accurate a medical test can be on healthy individuals:</p>
-<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2020-03-29-the-perils-of-medical-testing_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="bayesian-inference" class="section level1">
 <h1>Bayesian inference</h1>
-<p>The mechanics behind all of this lies in something called ‘statistical inference’. Inferential reasoning has a relatively short history and can be traced back to <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes’ theorem</a> whose simplicity disguises the profound consequences it has had on the domain of probability &amp; statistics:</p>
+<p>You may be wondering at this point as to where all of these calculations come from.</p>
+<p>The answer to this lies in something called ‘statistical inference’. Inferential reasoning has a relatively short history and can be traced back to <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes’ theorem</a> whose simplicity disguises the profound consequences it has had on the domain of probability &amp; statistics:</p>
 <p><span class="math display">\[\mathbb{P}(A | B) = \dfrac{\mathbb{P}(B|A)\mathbb{P}(A)}{\mathbb{P}(B)}\]</span></p>
 <p>The symbol <span class="math inline">\(\mathbb{P}\)</span> is the probability function. Each of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are types of ‘events’. In our case, if we let <span class="math inline">\(A\)</span> define the event that ‘We have the disease’ and <span class="math inline">\(B\)</span> define the event that ‘We tested positive for the disease’ then we can interpret <span class="math inline">\(\mathbb{P}(A|B)\)</span> as ‘the probability of having the disease, <em>given</em> that we have tested positive’.</p>
-<p>This is what we wanted to calculate at the beginning: ‘What are the chances that we <em>actually</em> have the disease, given that we have tested positive?’</p>
+<p>This is what we originally wanted to calculate at the beginning: ‘What are the chances that we <em>actually</em> have the disease, given that we have tested positive?’.</p>
+<p>If you plug in the numbers you’ll find that this comes to 56.3% - I’ll let those of you who are keen enough to try it for yourself!</p>
 </div>
