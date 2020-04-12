@@ -6,10 +6,20 @@
     <description>Recent content in R on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The evolution of the Tour De France</title>
+      <link>/2020/04/12/the-evolution-of-the-tour-de-france/</link>
+      <pubDate>Sun, 12 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/12/the-evolution-of-the-tour-de-france/</guid>
+      <description>The Dreyfus affair  “I swear that I am innocent. I remain worthy of serving in the Army. Long live France! Long live the Army!”
+ These were the famous words uttered by Alfred Dreyfus as he was convicted by fellow French officials in a secret court martial back in 1895, following allegations of espionage and treason against the French state. The incident - commonly referred to as the ‘Dreyfus affair’ - went down as one of the most controversial and polarising political dramas in all of French history.</description>
+    </item>
     
     <item>
       <title>The perils of medical testing</title>
