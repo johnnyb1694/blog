@@ -233,7 +233,7 @@ Nowadays, people have an image of the Tour De France as a pure sporting spectacl
 
 The first edition of the Tour De France was sponsored by an up and coming newspaper that went by the name of [L'Auto](https://en.wikipedia.org/wiki/L%27%C3%89quipe). The motivation behind the event was to generate publicity for the newspaper and therefore allow it to compete on business terms with its main rival, a newspaper known as [Le Vélo](https://en.wikipedia.org/wiki/Le_V%C3%A9lo). 
 
-The owner of L'Auto, Jules-Albert De Dion, was no fan of Le Vélo's left-wing, 'Dreyfusard' stance. In fact, De Dion was so infuriated with the government's response that [he spent 15 days in prison](https://en.wikipedia.org/wiki/Le_V%C3%A9lo#The_Dreyfus_affair) after striking the then President of France, Émile Loubet, over the head with a walking stick. Needless to say, this moment of carelessness didn't stop him from running the first edition of the Tour De France in 1903. And thus, history was made.
+The owner of L'Auto, Jules-Albert De Dion, was no fan of Le Vélo's left-wing, 'Dreyfusard' stance. He was also no fan of the government's response to the affair. Indeed, [he spent 15 days in prison](https://en.wikipedia.org/wiki/Le_V%C3%A9lo#The_Dreyfus_affair) after striking the then President of France, Émile Loubet, over the head with a walking stick. Needless to say, this moment of carelessness didn't stop him from running the first edition of the Tour De France in 1903. And thus, history was made.
 
 # The game has changed
 
@@ -265,7 +265,7 @@ Indeed, not only is it possible but it is in fact *commonplace* for most winners
 winner_stage_plot
 ```
 
-Remember: you only need to register the lowest *aggregate* time overall in order to win the competition. Even if you came second in every stage of the race to at least two different people, you would still win!
+Remember: you only need to register the lowest *aggregate* time overall in order to win the competition. If you still think this sounds odd, just imagine coming second in every stage of the race, each time to a different participant.
 
 # The characteristics of winners
 
