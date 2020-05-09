@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Johnny&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Biology</title>
       <link>/tags/biology/</link>
-      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/biology/</guid>
       <description></description>
@@ -23,7 +23,7 @@
     <item>
       <title>Coronavirus</title>
       <link>/tags/coronavirus/</link>
-      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/coronavirus/</guid>
       <description></description>
@@ -32,7 +32,7 @@
     <item>
       <title>Covid 19</title>
       <link>/tags/covid-19/</link>
-      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/covid-19/</guid>
       <description></description>
@@ -50,9 +50,18 @@
     <item>
       <title>Epidemiology</title>
       <link>/tags/epidemiology/</link>
-      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/epidemiology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Logistic Growth</title>
+      <link>/tags/logistic-growth/</link>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/logistic-growth/</guid>
       <description></description>
     </item>
     

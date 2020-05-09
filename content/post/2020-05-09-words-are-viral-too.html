@@ -1,0 +1,79 @@
+---
+title: Words are viral too
+author: Johnny Breen
+date: '2020-05-09'
+slug: words-are-viral-too
+categories:
+  - Data Science
+  - R
+tags:
+  - coronavirus
+  - biology
+  - epidemiology
+  - logistic growth
+  - covid-19
+---
+
+
+
+<p>On the 9 January 2020, the New York Times published an article with the following headline,</p>
+<blockquote>
+<p><em>‘China Identifies New Virus Causing Pneumonialike Illness’</em></p>
+</blockquote>
+<p>Little did we know back then the scale of the pandemic that awaited us. Hauntingly, the article was prefaced with a statment that there was ‘no evidence of human-to-human transmission’. Alert levels were low.</p>
+<p>But then, just 11 days later on the 20 January 2020, a new article was published which confirmed our worst fears,</p>
+<blockquote>
+<p><em>‘China Confirms New Coronavirus Spreads from Humans to Humans’</em></p>
+</blockquote>
+<p>The rest, as they say, is history.</p>
+<div id="what-happened-after" class="section level1">
+<h1>What happened after?</h1>
+<p>Courtesy of the New York Times API, I was able to answer this question. I acquired metadata on over 20,000 articles written between 1 January 2020 and 1 May 2020 and observed some interesting trends.</p>
+<p>First, despite the scary headlines, it wasn’t until late March that the coronavirus began to gain substantial traction in terms of media coverage,</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Each of the dots presented in the graph above correspond to the (incremental) number of articles written in relation to COVID-19 on each day from 1 January 2020 all the way up until the present day.</p>
+<p>However, it is more instructive to look at this graph on a cumulative basis,</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This graph doesn’t look very interesting, but I can assure you: it is. This pattern is ubiquitous in nature and it has a name: ‘logistic growth’. Back in 1838 a scientist by the name of <a href="https://en.wikipedia.org/wiki/Logistic_function#In_ecology:_modeling_population_growth">Pierre-Francois Verhulst</a> discovered this pattern - a period of exponential growth (from February to April) followed by plateau (towards the end of May) - in the field of population dynamics:</p>
+<p><img src="/img/verhulst-plot-1845.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>He observed that rate of reproduction within a given society is proportional to both the existing population and the amount of available resources. The former means that populations initially grow at an exponential rate. However, the latter means that a bottleneck is incurred at some point in time - this happens when members of the same population compete with each other for critical resources, such as food or living space. Ultimately, this causes a plateauing effect to occur, which can be observed at approximately April 1 in the graph presented above.</p>
+<p>If you fit a ‘logistic model’ to the graph presented above, you start to see the viral phenomena of the word ‘coronavirus’ itself which Verhulst alluded to:</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="modelling-trends" class="section level1">
+<h1>Modelling trends</h1>
+<p>This made me think: what else is trending? More importantly, what <em>isn’t</em> trending? Which topics have fallen off the radar?</p>
+<p>To find out the answer to this question, I fit a ‘logistic regression’ to every single term in the extracted database. This model has some limitations because it assumes that words will indeed experience a period of exponential growth and eventually reach ‘full coverage’ (which means that it is the only word in existence which is hardly imaginable!). However, it’s a good proxy for identifying growth and we can filter out low-scoring terms with no evidence of exponential growth.</p>
+<p>I decided to first focus on which terms have the strongest positive association with time i.e. trending terms. And the results were as follows,</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>I removed the word ‘coronavirus’ from this presentation as it is the highest trending term. However, even wtihin this limited set of 10 words we can start to observe some notable reporting trends: how the coronavirus affects ‘kids’ is a popular one, as well as the plight of ‘health workers’ and the efficacy of ‘masks’.</p>
+<p>More importantly: pay attention to when these terms start to accelerate in growth. If you map out the logistic growth models of select terms (e.g. kids, workers and masks) in the above analysis and compare them to the ‘coronavirus’ model, you can note when the model expects maximum growth for each term,</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This is perhaps the phenomena Verhulst alluded to in his paper on population dynamics; however, instead of human beings competing with each other, we have several topics competing with each other for coverage.</p>
+<p>Now let’s turn our attention to topics which have fallen off the radar,</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>There is a complete history of events borne out of these terms: when is the last time you contemplated Trump’s impeachment? What about the ‘killing’ of Soleimani in ‘Iran’?</p>
+<p>Though none of this is surprising per se, what might surprise you is how reliant you are on the media for consumption. Unknowingly or not, the media is the true <a href="https://en.wikipedia.org/wiki/Unmoved_mover">prime mover</a> - the driving force behind most of your thoughts!</p>
+</div>
+<div id="sentiment-analysis" class="section level1">
+<h1>Sentiment analysis</h1>
+<p>Negative events breed negative thoughts in all of us.</p>
+<p>The proportion of negative terms - relative to positive terms - over time demonstrates a moderately increasing trend,</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>But how do we know whether this increase is beyond the realms of what we would ‘expect’? A hypothesis test - comparing average negativity before and after the 1 March 2020 - shows that the increase <em>is</em> beyond what we would expect meaning that negativity has increased substantially since the onset of the coronavirus,</p>
+<p><img src="/post/2020-05-09-words-are-viral-too_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="a-closing-word" class="section level1">
+<h1>A closing word</h1>
+<blockquote>
+<p><em>‘What is the most resilient parasite? A bacteria? A virus? An intestinal worm? …an idea - resilient, highly contagious. Once an idea has taken hold in the brain it’s almost impossible to eradicate’</em> - Dom Cobb, Inception (2010)</p>
+</blockquote>
+<p>Words - or ideas - are more powerful than you think and as we have seen, they have the potential to behave just like a virus. Think of the last time you heard some gossip in the workplace. How long was it before everyone knew about it? Worse still, how long did it take to dispel any resulting false rumours?</p>
+<p>Physical distancing is one thing but how often do we ‘distance’ ourselves from spreading false narratives or rumours, the very things that push us apart? Not often enough. If we are to truly beat this virus then that will include staving off false truths.</p>
+<p>As Marcus Aurelius <a href="https://dailystoic.com/marcus-aurelius-leadership-during-a-pandemic/">aptly wrote</a> in ‘Meditations’, “A disease like the plague can only threaten your life… Evil, selfishness, pride, hypocrisy, fear - these things attack our humanity”.</p>
+</div>
+<div id="disclaimer-code" class="section level1">
+<h1>Disclaimer &amp; code</h1>
+<p>The underlying data used to construct the above analysis was acquired via the New York Times who were kind enough to provide an API for research purposes. For the avoidance of doubt, the views expressed in this article are mine alone. The New York Times neither promotes or endorses these views.</p>
+<p>If you are interested in reading a much more technical write-up of the above, you can find it on my <a href="https://github.com/johnnyb1694/data-analysis/blob/master/1.%20Technical%20write-ups/Emerging%20trends%20in%20reporting/emerging-trends-analysis.md">GitHub</a>.</p>
+</div>
