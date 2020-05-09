@@ -253,9 +253,9 @@ logit_model_inputs %>%
 
 ```
 
-I removed the word 'coronavirus' from this presentation as it is the highest trending term. However, even wtihin this limited set of 10 words we can start to observe some notable reporting trends: how the coronavirus affects 'kids' is a popular one, as well as the plight of 'health workers' and the efficacy of 'masks'.
+I removed the word 'coronavirus' from this presentation as it is the highest trending term. However, even within this limited set of 10 words we can start to observe some notable reporting trends: how the coronavirus affects 'kids' is a popular one, as well as the plight of 'health workers' and the efficacy of 'masks'.
 
-More importantly: pay attention to when these terms start to accelerate in growth. If you map out the logistic growth models of select terms (e.g. kids, workers and masks) in the above analysis and compare them to the 'coronavirus' model, you can note when the model expects maximum growth for each term,
+More importantly: pay attention to when these terms start to accelerate in growth. If you map out the logistic growth models of select terms (e.g. kids, workers and masks) in the above analysis and compare them to the 'coronavirus' model, then you can see when exactly each term can expect to experience maximum growth,
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 focus_terms <- c("masks", "kids", "workers", "coronavirus")
