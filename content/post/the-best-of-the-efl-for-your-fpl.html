@@ -1,0 +1,54 @@
+---
+title: The best of the EFL (for your FPL)
+author: Johnny Breen
+date: '2020-08-22'
+slug: the-best-of-the-efl-for-your-fpl
+categories:
+  - R
+  - Data Science
+  - Football
+tags:
+  - Football
+  - data science
+---
+
+
+
+<p>If the EFL championship could be summed up in one way it would be <a href="https://twitter.com/QuestTV/status/1286075151877132290">Gerhard Struber's interview</a> on the final day of the season when his side, Barnsley, managed a dramatic win in the 91st minute over automatic promotion contenders Brentford to secure their place in the EFL championship next season.</p>
+<p>If you haven't watched this already, you need to:</p>
+{{% tweet "1286075151877132290" %}}
+<p>Struber's teary-eyed admission at the close of play was testament to the frantic nature of the championship. From the elation of Barnsley's survival to the <a href="https://theathletic.co.uk/1907722/2020/07/04/wigan-athletic-royle-efl-paul-cook-hong-kong-yeung/?article_source=search&amp;search_query=Wigan%20Athletic">devastating tragedy of Wigan Athletic</a>, one thing is for certain: <a href="https://theathletic.com/1945589/2020/07/23/a-portrait-of-the-maddest-night-in-the-maddest-league-in-the-world/">in this league</a>, football is played in the hearts and minds of all spectators as much as it is played on the pitch.</p>
+<p>Nonetheless, it would be unfair and patronising to view the Championship as nothing more than a mere emotional spectacle. The truth is, there is <em>genuine</em> talent in the EFL and many clubs within the Premier League, in my view, would be fools to ignore it. Beyond the obvious candidates such as Ollie Watkins and Saïd Benrahama (whom appear <a href="https://theathletic.co.uk/1978674/2020/08/11/villa-sensible-transfers-watkins-benrahma-chalobah/">destined to join Aston Villa this summer</a>), I took a very brief look at other gems within the Championship that have, perhaps, fallen under the radar this season.</p>
+<div id="from-playmakers-to-goalscorers-the-efls-best" class="section level1">
+<h1>From playmakers to goalscorers: the EFL's best</h1>
+<p>Whilst this brief analysis is limited to goals and assists, these simple statistics do allow us to ask an important question: who are the most integral players for their team in the EFL Championship?</p>
+<p>Taking a substantial amount of influence from <a href="https://twitter.com/R_by_Ryo/status/1129773418184925184">Ryo Nakagarawa's goal contribution plot</a> (in relation to the EPL):</p>
+<p><img src="/img/goal_contribution_matrix_plot_logo.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Unfortunately, the data I have relied upon did not account for loan players. I will try to include this at a later point.</p>
+<p>For now, what I find interesting about this visualisation is the number of players that have 'escaped' from the lower left-hand quadrant. This is in contrast to Ryo's plot which sees only a handful of EPL players break free of relative mediocrity.</p>
+<p>So what about individual players? In terms of playmakers, Matheus Pereira will be of no surprise to anybody who has watched the EFL Championship this season:</p>
+{{% youtube "l4rl_5KSPCE" %}}
+<p>The Brazilian has registered 8 goals and 16 assists (20 assists if you include penalties won) this season and, judging by his work ethic, looks set to replicate this type of form in the EPL next season. But it would be too easy to isolate Pereira and leave it at that: John Swift of Reading also deserves a lot of credit for his contributions which, judging by this data, have gone somewhat under the radar this season. Jed Wallace has also impressed everybody this season with his pace and trickery on the wings; however, he has also scored almost 20% of Millwall's goals this season which makes him one of the most integral wingers in the league.</p>
+<p>On the other side of the spectrum we can note which teams are especially reliant on particular individuals for all of their goals: Grant of Huddersfield, Jutkiewicz of Birmingham City and Mitrović of Fulham. These players are contributing a whopping 40 - 50% of their total respective club goals! The balance of goalscoring was achieved much better by Brentford: Benrahma and Watkins were both high contributors towards Brentford's goals this season. West Brom achieved a similarly healthy balance of goalscorers (however they are <em>incredibly</em> reliant on Pereira to make things happen as it stands).</p>
+</div>
+<div id="attacking-talent-for-your-fpl-squad" class="section level1">
+<h1>Attacking talent for your FPL squad</h1>
+<p>Let's take a closer look at Fulham, Leeds and West Brom. Which players represent the best value for money in FPL this season? These players are worth considering as the vast majority of gameplayers aren't familiar with the EFL, thus minimising their trade value.</p>
+<p>Aside from goal contribution statistics, it is important to consider the number of minutes played over the course of the season (you don't want to opt for a player who is likely to be on the bench for half of the season):</p>
+<p><img src="/img/goal_contribution_matrix_mins_plot_logo.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Note that 'GA' is essentially the expected chance of a goal or assist being contributed by a given player in a given game, using EFL Championship data acquired during the 2019 - 2020 season. For this reason alone, you should probably interpret these numbers with a massive pinch of salt. However, whilst the numbers themselves are probably inaccurate, they do indicate the relative ability of each player considered fairly accurately.</p>
+<p>At the top of the list we have Matheus Pereira and A. Mitrović. No more commentary is necessary on the former and the latter won't surprise many casual viewers of the EPL - after all, Mitrović is well known for his goalscoring abilities ... as well as his proclivity to incitement,</p>
+{{% tweet "1290769297099444227" %}}
+<p>Bamford, slightly surprisingly, isn't far behind and, if Leeds stick with him next season (which is not beyond the realms of possibility) then I can see him being a shrewd acquisition. Nonetheless, we'll have to wait and see.</p>
+<p>One thing I'd like to add: forgetting about FPL for a second, let's take a moment to appreciate the contributions of Ivan Cavaleiro and Matty Phillips both of whom have come in for some serious stick this season from each of their respective fanbases! Phillips in particular has registered a very impressive goal contribution record despite playing less than 2,500 minutes this season.</p>
+</div>
+<div id="more-to-come" class="section level1">
+<h1>More to come</h1>
+<p>That's all for now folks. I plan to do more indepth football analysis in the forthcoming few months (FBRef appears to be the go-to place for good quality data).</p>
+</div>
+<div id="sources" class="section level1">
+<h1>Sources</h1>
+<p>The visualisations presented above are for personal use only. They rely on data sourced from www.soccerway.com.</p>
+<p>I'd also like to thank <a href="https://twitter.com/R_by_Ryo">Ryo Nakagarawa</a> for his excellent posts on soccer analytics that allowed me to create this post. Please check him out if you have a moment!</p>
+<p>The underlying code attributable to this analysis can be found on my GitHub page.</p>
+</div>

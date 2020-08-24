@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2020/08/22/the-best-of-the-efl-for-your-fpl/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2020/05/09/words-are-viral-too/</loc>
     <lastmod>2020-05-09T00:00:00+00:00</lastmod>
   </url>
@@ -58,13 +63,13 @@
   
   <url>
     <loc>/tags/data-science/</loc>
-    <lastmod>2020-04-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/data-science/</loc>
-    <lastmod>2020-05-09T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -75,8 +80,20 @@
   </url>
   
   <url>
+    <loc>/tags/football/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/football/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2020-05-09T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -88,7 +105,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-05-09T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -100,7 +117,7 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2020-05-09T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
